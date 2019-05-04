@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
 import requests
 import bs4
 import re
-## info on setting up webdriver at https://likegeeks.com/python-web-scraping/
+## navodila za nastavitev https://likegeeks.com/python-web-scraping/
 from selenium import webdriver
 import csv as csv
 import os
 
-browser = webdriver.Chrome("chromedriver.exe") ## location of Chrome webdriver on computer
+browser = webdriver.Chrome("pythonpodatki\chromedriver.exe")
 req = requests.get("https://boardgamegeek.com/browse/boardgame")
 soup = bs4.BeautifulSoup(req.text, "html.parser")
 
-## titles of top 100 games
+## naslovi top 100 iger
 collection = soup.select(".collection_objectname") ## select class .
 titles = []
 for i in collection:
@@ -19,17 +18,17 @@ for i in collection:
     title.extend(i.stripped_strings)
     titles.append(title[0])
 
-## subtables, one for each game + an additional starting one
+## podtabele, zacetna in nato po ena za vsako izmed 100 iger
 table = soup.find(lambda tag: tag.name == "table" and tag.has_attr("id") and tag["id"] == "collectionitems")
 rows = table.find_all(lambda tag: tag.name == "tr")
 
-## list of web page suffices
+## seznam web page koncnic
 games = []
 for row in rows[1::]:
     a = row.find("a", href = True)
     games.append(a["href"])
 
-## game attributes
+## atributi iger
 gtime = []
 players = []
 age = []
@@ -39,35 +38,35 @@ genre = []
 
 i = 0
 for game in games:
-    ## web page of current game created on Chrome webdriver - Selenium
+    ## web page trenutne igre, ki se ga ustvari na webdriverju
     browser.get("https://boardgamegeek.com" + game)
     s = bs4.BeautifulSoup(browser.page_source, "html.parser")
 
     primary = s.find_all("div", class_ = "gameplay-item-primary")
-    ## number of players list
+    ## seznam st. igralcev
     g = []
     g.extend(primary[0].stripped_strings)
     players.append(''.join(g))
 
-    ## time of playing list
+    ## dolzina igranja
     g = []
     g.extend(primary[1].stripped_strings)
     gtime.append(''.join(g))
 
-    ## age list
+    ## starost
     g = []
     g.extend(primary[2].stripped_strings)
     age.append(''.join(g))
 
     primary = s.find_all(class_="credits")
-    ## designers
+    ## designerji
     secondary = primary[1].find_all("a", href=re.compile("designer"))
     g = []
     for name in secondary:
         g.append(name["title"])
     designers.append(g)
 
-    ## artists
+    ## artisti
     secondary = primary[1].find_all("a", href=re.compile("artist"))
     g = []
     for name in secondary:
@@ -76,27 +75,9 @@ for game in games:
 
     i = i+1
 
-## To show proper characters in excel you have open new excel file and import data from games.csv using utf-8 encoding.
-with open('games.csv', 'w', newline='', encoding='utf-8') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(["Game", "Nr. of player", "Playing time", "Age", "Designers", "Artists"])
+## To show proper characters in excel you have to open new excel file and import data from games.csv using utf-8 encoding.
+with open('pythonpodatki\igre.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Game", "Nr. of player", "Playing time", "Age", "Designers", "Artists"])
     for i in range(len(titles)):
-        writer.writerow([titles[i], players[i], gtime[i], age[i], designers[i], artists[i]])
-
-#################################################################################
-
-## test for Gloomhaven game
-GH =[titles[0], players[0], gtime[0], age[0], artists[0], designers[0]]
-
-""" browser.get("https://boardgamegeek.com" + games[0])
-s = bs4.BeautifulSoup(browser.page_source, "html.parser")
-primary = s.find_all(class_="credits")
-de = primary[1].find_all("a", title=True)
-de = primary[1].find_all("a", href=re.compile("artist"))
-for d in de:
-    print(d["title"])
-
-primary = s.find_all("div", class_ = "credits")
-a = primary[1]["title"]
-g = []
-g.extend(primary[1].stripped_strings) """
+        wr.writerow([titles[i], players[i], gtime[i], age[i], designers[i], artists[i]])
