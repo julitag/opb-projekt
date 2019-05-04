@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
 import requests
 import bs4
 import re
 ## info on setting up webdriver at https://likegeeks.com/python-web-scraping/
 from selenium import webdriver
+import csv as csv
+import os
 
-browser = webdriver.Chrome(executable_path=r"C:/Users/Gašper/Desktop/projekt OPB/chromedriver.exe") ## location of Chrome webdriver on computer
+browser = webdriver.Chrome("chromedriver.exe") ## location of Chrome webdriver on computer
 req = requests.get("https://boardgamegeek.com/browse/boardgame")
 soup = bs4.BeautifulSoup(req.text, "html.parser")
 
@@ -35,7 +38,7 @@ designers = []
 genre = []
 
 i = 0
-for game in games[:10]:
+for game in games:
     ## web page of current game created on Chrome webdriver - Selenium
     browser.get("https://boardgamegeek.com" + game)
     s = bs4.BeautifulSoup(browser.page_source, "html.parser")
@@ -72,6 +75,13 @@ for game in games[:10]:
     artists.append(g)
 
     i = i+1
+
+## To show proper characters in excel you have open new excel file and import data from games.csv using utf-8 encoding.
+with open('games.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["Game", "Nr. of player", "Playing time", "Age", "Designers", "Artists"])
+    for i in range(len(titles)):
+        writer.writerow([titles[i], players[i], gtime[i], age[i], designers[i], artists[i]])
 
 #################################################################################
 
