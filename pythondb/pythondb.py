@@ -17,6 +17,11 @@ def ustvari_tabelo_igra():
         CREATE TABLE igra (
             id SERIAL PRIMARY KEY,
             ime TEXT NOT NULL,
+            min_igralcev INT,
+            max_igralcev INT,
+            min_cas INT,
+            max_cas INT,
+            leto_izdaje INT,
             starost INT
         );
     """)
@@ -36,14 +41,16 @@ def uvozi_podatke_igra():
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
         for line in rd:
-            r = [line[0], int(re.search(r'\d+', line[3]).group())]
+            ## ce ni podatka o starosti
+            if line[6] == '':
+                line[6] = None
             cur.execute("""
                 INSERT INTO igra
-                (ime, starost)
-                VALUES (%s, %s)
+                (ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
                 RETURNING id
-            """, r)
+            """, line)
             ## fetchone() dobi naslednji rezultat poizvedbe, prva vrednost je ID
-            rid, = cur.fetchone()
-            print("Uvožena igra %s z ID-jem %d" % (r[0], rid)) ## %s string %d integer ... string formating
+            lineid, = cur.fetchone()
+            print("Uvožena igra %s z ID-jem %d" % (line[0], lineid)) ## %s string %d integer ... string formating
     conn.commit()
