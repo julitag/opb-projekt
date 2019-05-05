@@ -32,7 +32,7 @@ def pobrisi_tabelo_igra():
     conn.commit()
 
 def uvozi_podatke_igra():
-    with open("pythondb\igre.csv", encoding='utf-8') as f:
+    with open("pythondb/igre.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
         for line in rd:
@@ -45,5 +45,5 @@ def uvozi_podatke_igra():
             """, r)
             ## fetchone() dobi naslednji rezultat poizvedbe, prva vrednost je ID
             rid, = cur.fetchone()
-            print("Uvožena igra %s z ID-jem %d" % (r[0], rid))
+            print("Uvožena igra %s z ID-jem %d" % (r[0], rid)) ## %s string %d integer ... string formating
     conn.commit()
