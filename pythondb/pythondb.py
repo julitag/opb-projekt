@@ -54,3 +54,20 @@ def uvozi_podatke_igra():
             lineid, = cur.fetchone()
             print("Uvožena igra %s z ID-jem %d" % (line[0], lineid)) ## %s string %d integer ... string formating
     conn.commit()
+
+def ustvari_uporabnik():
+    cur.execute("""
+        CREATE TABLE uporabnik (
+            id SERIAL PRIMARY KEY,
+            username TEXT NOT NULL,
+            mail TEXT NOT NULL,
+            geslo TEXT NOT NULL
+        );
+    """)
+    conn.commit()
+
+def pobrisi_uporabnik():
+    cur.execute("""
+        DROP TABLE uporabnik;
+    """)
+    conn.commit()
