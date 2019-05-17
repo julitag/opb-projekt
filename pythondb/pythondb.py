@@ -1,16 +1,22 @@
 import auth
-
 import psycopg2, psycopg2.extensions, psycopg2.extras
-psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-
 import csv
 import re
 
-## povezava z bazo
-conn = psycopg2.connect(database=auth.db, host=auth.host, user=auth.user, password=auth.password)
+## Ctrl + Shift + P -> select interpreter -> python 3.7.2
+## Ctrl + Shift + P -> Terminal: Create New Integrated Terminal
+## vpisi: python, pritisni enter
+## vpisi: exec(open('pythondb\pythondb.py').read()), pritisni enter <- sedal je aktiviran pythonov shell
+## vpisi ukaze za ustvarjanje/brisanje tabel, dodajanje podatkov
 
-## na kurzorju izvedem ukaz in dobim rezultat, vedno po en pa po en 
-cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+###################
+
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODE) ## šumniki
+conn = psycopg2.connect(database=auth.db, host=auth.host, user=auth.user, password=auth.password) ## povezava z bazo
+conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT) ## izvede se autocommit
+cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) ## na kurzorju izvedem ukaz in dobim rezultat, vedno po en pa po en
+
+###################
 
 def ustvari_tabelo_igra():
     cur.execute("""
@@ -59,15 +65,38 @@ def ustvari_uporabnik():
     cur.execute("""
         CREATE TABLE uporabnik (
             id SERIAL PRIMARY KEY,
+            tip TEXT NOT NULL CHECK (tip in ('uporabnik', 'moderator')),
             username TEXT NOT NULL,
             mail TEXT NOT NULL,
             geslo TEXT NOT NULL
-        );
+        )
+    """)
+    cur.execute("""
+        SELECT SETVAL(pg_get_serial_sequence('uporabnik', 'id'), 1000)
     """)
     conn.commit()
 
 def pobrisi_uporabnik():
     cur.execute("""
-        DROP TABLE uporabnik;
+        DROP TABLE uporabnik
+    """)
+    conn.commit()
+
+def dodaj_pravice():
+    cur.execute("""
+        GRANT CONNECT ON DATABASE sem2019_gasperl TO javnost
+    """)
+    ## grant usage daje dostop do tabel. izjemoma za public ni potrebno, ker imajo po defaultu uporabniki CREATE and USAGE privilegije na PUBLIC shema
+    ## brez grant ostali dostopi nimajo smisla
+    ## schema je zbirka podatkovnih objektov, ki je asociirana z neko doloceno bazo
+    cur.execute("""
+        GRANT USAGE ON SCHEMA public TO javnost
+    """)
+    cur.execute("""
+        GRANT SELECT, UPDATE, INSERT ON ALL TABLES IN SCHEMA public TO javnost
+    """)
+    ## sequences za generiranje stevilk, vrednosti za kljuce, itd...
+    cur.execute("""
+        GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO javnost;
     """)
     conn.commit()

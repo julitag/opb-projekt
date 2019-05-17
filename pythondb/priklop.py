@@ -2,12 +2,14 @@
 # -*- encoding: utf-8 -*-
 
 import bottle
-import auth as auth
+import auth_public as auth
 import psycopg2, psycopg2.extensions, psycopg2.extras
-psycopg2.extensions.register_type(psycopg2.extensions.UNICODE) # se znebimo problemov s šumniki
 import hashlib
 
 bottle.debug(True)
+## to je za kodiranje cookiejev v brskalniku, da jih uporabnik ne more spreminjati in s tem povzrocati zmedo
+## trenutni cookieji v chromeu: more tools -> developer tools -> application -> cookies
+## vsakic ko gremo na naso spletno stran, server vrne cookie
 secret = "to skrivnost je zelo tezko uganiti 1094107c907cw982982c42"
 
 ######################################################################
@@ -20,15 +22,30 @@ def password_md5(s):
     h.update(s.encode('utf-8'))
     return h.hexdigest()
 
-# Funkcija, ki v cookie spravi sporocilo
-def set_sporocilo(tip, vsebina):
-    bottle.response.set_cookie('message', (tip, vsebina), path='/', secret=secret)
-
-# Funkcija, ki iz cookija dobi sporočilo, če je
-def get_sporocilo():
-    sporocilo = bottle.request.get_cookie('message', default=None, secret=secret)
-    bottle.response.delete_cookie('message')
-    return sporocilo
+def get_user(auto_login = True):
+    """Poglej cookie in ugotovi, kdo je prijavljeni uporabnik,
+       vrni njegov username in ime. Če ni prijavljen, presumeri
+       na stran za prijavo ali vrni None (advisno od auto_login).
+    """
+    # Dobimo username iz piškotka
+    username = bottle.request.get_cookie('username', secret=secret)
+    print(username)
+    # Preverimo, ali ta uporabnik obstaja
+    if username is not None:
+        c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        c.execute("SELECT tip, username, mail FROM uporabnik WHERE username=%s",
+                  [username])
+        r = c.fetchone()
+        conn.commit()
+        # c.close()
+        if r is not None:
+            # uporabnik obstaja, vrnemo njegove podatke
+            return r
+    # Če pridemo do sem, uporabnik ni prijavljen, naredimo redirect
+    if auto_login:
+        bottle.redirect('/login/')
+    else:
+        return None
 
 ########################################################################
 
@@ -36,10 +53,24 @@ def get_sporocilo():
 def server_static(filepath): ## serviramo datoteko iz mape static
     return bottle.static_file(filepath, root='static')
 
-@bottle.get('/login/') ## lokacija nasega filea, tip: path
-def login_get(): ## serviramo datoteko iz mape static
+@bottle.route("/")
+def main():
+    """Glavna stran."""
+    # Iz cookieja dobimo uporabnika (ali ga preusmerimo na login, če nima cookija)
+    (tip, username, mail) = get_user()
+    # Vrnemo predlogo za glavno stran
+    return bottle.template("index.html", uporabnik=username)
+
+@bottle.get('/login/')
+def login_get(): 
     """Serviraj formo za login."""
     return bottle.template('login.html', napaka=None, username=None) ## na zacetku ni usernamea in napake
+
+@bottle.get("/logout/")
+def logout():
+    """Pobriši cookie in preusmeri na login."""
+    bottle.response.delete_cookie('username', path='/', secret=secret)
+    bottle.redirect('/login/')
 
 @bottle.post("/login/")
 def login_post():
@@ -52,6 +83,7 @@ def login_post():
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     c.execute("SELECT 1 FROM uporabnik WHERE username=%s AND geslo=%s",
               [username, password])
+    conn.commit()
     if c.fetchone() is None:
         # Username in geslo se ne ujemata
         return bottle.template("login.html",
@@ -80,6 +112,7 @@ def register_post():
     # Ali uporabnik že obstaja?
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     c.execute("SELECT 1 FROM uporabnik WHERE username=%s", [username])
+    conn.commit()
     if c.fetchone():
         # Uporabnik že obstaja
         return bottle.template("register.html",
@@ -95,9 +128,8 @@ def register_post():
     else:
         # Vse je v redu, vstavi novega uporabnika v bazo
         password = password_md5(password1)
-        print("uspeh")
-        c.execute("INSERT INTO uporabnik (username, mail, geslo) VALUES (%s, %s, %s)",
-                  (username, mail, password))
+        c.execute("INSERT INTO uporabnik (tip, username, mail, geslo) VALUES (%s, %s, %s, %s)",
+                  ('uporabnik', username, mail, password))
         conn.commit()
         # Daj uporabniku cookie
         bottle.response.set_cookie('username', username, path='/', secret=secret)
@@ -106,6 +138,7 @@ def register_post():
 ####################################
 
 conn = psycopg2.connect(database=auth.db, host=auth.host, user=auth.user, password=auth.password)
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODE) # se znebimo problemov s šumniki
 
 # poženemo strežnik na portu 8080, glej http://localhost:8080/
 bottle.run(host='localhost', port=8080, reloader=True, debug=True)
