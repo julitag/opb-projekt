@@ -9,16 +9,16 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>SB Admin 2 - Dashboard</title>
 
-  <!-- Custom fonts for this template -->
+  <!-- Custom fonts for this template-->
   <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
+  <!-- Custom styles for this template-->
   <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this page -->
+    <!-- Custom styles for this page -->
   <link href="/static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
@@ -36,18 +36,31 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">SB Admin {{igra}}<sup>2</sup></div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="\">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Začetna stran</span></a>
-      </li>
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+          <a class="nav-link" href="/">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Igre</span></a>
+        </li>
+  
+        <li class="nav-item active">
+            <a class="nav-link" href="/brskalnik/">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Brskalnik</span></a>
+          </li>
+
+        <li class="nav-item active">
+              <a class="nav-link" href="/igra/{{igra}}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{igra}}</span></a>
+            </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -125,7 +138,7 @@
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/brskalnik/">
           <i class="fas fa-fw fa-table"></i>
           <span>Brskalnik iger</span></a>
@@ -159,7 +172,7 @@
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Išči" aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>
@@ -301,27 +314,27 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{uporabnik}}</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  Profil
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
+                  Nastavitve
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
+                  Dejavnosti
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Izpis
                 </a>
               </div>
             </li>
@@ -331,60 +344,62 @@
         </nav>
         <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+  <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                      %for i in range(len(igre)):
-                      <tr>
-                        <td>{{igre[i][0]}}</td>
-                        <td>Office Manager</td>
-                        <td>London</td>
-                        <td>30</td>
-                        <td>2008/12/19</td>
-                        <td>$90,560</td>
-                      </tr>
-                      %end 
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                  <th>ID igre</th>
+                  <th>Ime igre</th>
+                  <th>Število igralcev</th>
+                  <th>Čas igranja</th>
+                  <th>Min. starost</th>
+                  <th>Leto izdaje</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                    <th>ID igre</th>
+                    <th>Ime igre</th>
+                    <th>Število igralcev</th>
+                    <th>Čas igranja</th>
+                    <th>Starost</th>
+                    <th>Leto izdaje</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                  %for igra in igre:
+                  <tr>
+                    <td>{{igra[0]}}</td>
+                    <td>
+                        <a href="/igra/{{igra[1]}}">{{igra[1]}}</a>
+                    </td>
+                    <td>{{str(igra[2]) + ' - ' + str(igra[3])}}</td>
+                    <td>{{str(igra[4]) + ' - ' + str(igra[5]) + " min"}}</td>
+                    <td>{{str(igra[7]) + " let"}}</td>
+                    <td>{{igra[6]}}</td>
+                  </tr>
+                  %end 
+              </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-        </div>
-        <!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
@@ -415,15 +430,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Zapuščaš stran?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Pritisni Izpis, če se želiš izpisati.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Pojdi nazaj</button>
+          <a class="btn btn-primary" href="/logout/">Izpis</a>
         </div>
       </div>
     </div>
@@ -442,10 +457,9 @@
   <!-- Page level plugins -->
   <script src="/static/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="/static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+  
   <!-- Page level custom scripts -->
   <script src="/static/js/demo/datatables-demo.js"></script>
-
 </body>
 
 </html>

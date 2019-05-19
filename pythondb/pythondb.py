@@ -1,12 +1,11 @@
+#!/usr/bin/python
+# -*- encoding: utf-8 -*-
+
 import auth
 import psycopg2, psycopg2.extensions, psycopg2.extras
 import csv
 import re
 
-## Ctrl + Shift + P -> select interpreter -> python 3.7.2
-## Ctrl + Shift + P -> Terminal: Create New Integrated Terminal
-## vpisi: python, pritisni enter
-## vpisi: exec(open('pythondb\pythondb.py').read()), pritisni enter <- sedal je aktiviran pythonov shell
 ## vpisi ukaze za ustvarjanje/brisanje tabel, dodajanje podatkov
 
 ###################
@@ -18,7 +17,11 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) ## na kurzorju izve
 
 ###################
 
-def ustvari_tabelo_igra():
+## from pythondb.pythondb import *
+## vpisi ustvari_igra() v shell, da se ustvari tabela v bazi
+## ce si se zmotil: conn.rollback()
+
+def ustvari_igra():
     cur.execute("""
         CREATE TABLE igra (
             id SERIAL PRIMARY KEY,
@@ -33,16 +36,13 @@ def ustvari_tabelo_igra():
     """)
     conn.commit()
 
-## vpisi ustvari_tabelo() v IDLE, da se ustvari tabela na bazi
-## ce si se zmotil: conn.rollback()
-
-def pobrisi_tabelo_igra():
+def pobrisi_igra():
     cur.execute("""
         DROP TABLE igra;
     """)
     conn.commit()
 
-def uvozi_podatke_igra():
+def uvozi_igra():
     with open("pythondb/igre.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
@@ -61,11 +61,21 @@ def uvozi_podatke_igra():
             print("Uvožena igra %s z ID-jem %d" % (line[0], lineid)) ## %s string %d integer ... string formating
     conn.commit()
 
+def select_igra():
+    cur.execute("""
+        SELECT * FROM igra;
+    """)
+    igre = cur.fetchall()
+    conn.commit()
+    return(igre)
+
+
+
 def ustvari_uporabnik():
     cur.execute("""
         CREATE TABLE uporabnik (
             id SERIAL PRIMARY KEY,
-            tip TEXT NOT NULL CHECK (tip in ('uporabnik', 'moderator')),
+            tip TEXT NOT NULL CHECK (tip in ('gost', 'registriranec', 'moderator')),
             username TEXT NOT NULL,
             mail TEXT NOT NULL,
             geslo TEXT NOT NULL
