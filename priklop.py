@@ -7,7 +7,6 @@ import psycopg2
 import psycopg2.extensions
 import psycopg2.extras
 import hashlib
-import pythondb as db
 
 bottle.debug(True)
 # to je za kodiranje cookiejev v brskalniku, da jih uporabnik ne more spreminjati in s tem povzrocati zmedo
@@ -67,7 +66,12 @@ def main():
     # Iz cookieja dobimo uporabnika (ali ga preusmerimo na login, če nima cookija)
     (tip, username, mail) = get_user()
 
-    igre = db.select_igra()
+    c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c.execute("""
+        SELECT * FROM igra;
+    """)
+    igre = c.fetchall()
+
     # Vrnemo predlogo za glavno stran
     return bottle.template("index.html", uporabnik=username, igre=igre)
 
@@ -89,7 +93,6 @@ def login_post():
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     c.execute("SELECT 1 FROM uporabnik WHERE username=%s AND geslo=%s",
               [username, password])
-    conn.commit()
     if c.fetchone() is None:
         # Username in geslo se ne ujemata
         return bottle.template("login.html",
@@ -128,7 +131,6 @@ def register_post():
     # Ali uporabnik že obstaja?
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     c.execute("SELECT 1 FROM uporabnik WHERE username=%s", [username])
-    conn.commit()
     if c.fetchone():
         # Uporabnik že obstaja
         return bottle.template("register.html",
@@ -157,8 +159,7 @@ def register_post():
 @bottle.get("/igra/<ime>")
 def igra_get(ime):
     (tip, username, mail) = get_user()
-    igre = db.select_igra()
-    return bottle.template("igra.html", uporabnik=username, igre=igre, igra=ime)
+    return bottle.template("igra.html", uporabnik=username, igra=ime)
 
 
 @bottle.get("/brskalnik/")

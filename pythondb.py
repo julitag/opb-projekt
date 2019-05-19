@@ -17,7 +17,7 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) ## na kurzorju izve
 
 ###################
 
-## from pythondb.pythondb import *
+## from pythondb import *
 ## vpisi ustvari_igra() v shell, da se ustvari tabela v bazi
 ## ce si se zmotil: conn.rollback()
 
@@ -43,7 +43,7 @@ def pobrisi_igra():
     conn.commit()
 
 def uvozi_igra():
-    with open("pythondb/igre.csv", encoding='utf-8') as f:
+    with open("tabele/igre.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
         for line in rd:
@@ -60,16 +60,6 @@ def uvozi_igra():
             lineid, = cur.fetchone()
             print("Uvožena igra %s z ID-jem %d" % (line[0], lineid)) ## %s string %d integer ... string formating
     conn.commit()
-
-def select_igra():
-    cur.execute("""
-        SELECT * FROM igra;
-    """)
-    igre = cur.fetchall()
-    conn.commit()
-    return(igre)
-
-
 
 def ustvari_uporabnik():
     cur.execute("""
