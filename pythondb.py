@@ -17,6 +17,7 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) ## na kurzorju izve
 
 ###################
 
+## python enter
 ## from pythondb import *
 ## vpisi ustvari_igra() v shell, da se ustvari tabela v bazi
 ## ce si se zmotil: conn.rollback()
@@ -82,6 +83,40 @@ def pobrisi_uporabnik():
     """)
     conn.commit()
 
+def ustvari_zanr():
+    cur.execute("""
+        CREATE TABLE zanr (
+            id SERIAL PRIMARY KEY,
+            ime TEXT NOT NULL
+        );
+    """)
+    conn.commit()
+
+def pobrisi_zanr():
+    cur.execute("""
+        DROP TABLE zanr;
+    """)
+    conn.commit()
+
+def uvozi_zanr():
+    with open("tabele/zvrst.csv", encoding='utf-8') as f:
+        rd = csv.reader(f)
+        next(rd) # izpusti naslovno vrstico
+        zanri = []
+        for line in rd:
+            ## v vrstici vzamemo vse elte
+            vigri = line[1]
+            vigri = vigri.replace('[', '').replace(']', '').replace('\'', '').split(",")
+            zanri.extend(vigri)
+        zanri = set(zanri)
+        zanri.remove('')
+        for zanr in zanri:
+            cur.execute("""
+                INSERT INTO zanr (ime)
+                VALUES (%s)
+            """, [zanr])
+    conn.commit()
+
 def dodaj_pravice():
     cur.execute("""
         GRANT CONNECT ON DATABASE sem2019_gasperl TO javnost
@@ -98,5 +133,20 @@ def dodaj_pravice():
     ## sequences za generiranje stevilk, vrednosti za kljuce, itd...
     cur.execute("""
         GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO javnost;
+    """)
+    conn.commit()
+
+def dodaj_pravice_julita():
+    cur.execute("""
+        GRANT CONNECT ON DATABASE sem2019_gasperl TO julitag
+    """)
+    cur.execute("""
+        GRANT USAGE ON SCHEMA public TO julitag
+    """)
+    cur.execute("""
+        GRANT ALL ON ALL TABLES IN SCHEMA public TO julitag
+    """)
+    cur.execute("""
+        GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO julitag;
     """)
     conn.commit()
