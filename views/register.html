@@ -1,0 +1,52 @@
+%rebase('osnova.html', naslov='Tabele')
+<div class="container">
+
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <!-- Nested Row within Card Body -->
+      <div class="row">
+        <img src="/static/img/boardgame.jpg" , width="350" , height="500">
+        <div class="col-lg-7">
+          <div class="p-5">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Ustvari račun</h1>
+            </div>
+
+            <form class="user" role="form" method="post" action=".">
+              %if napaka:
+              <div class="alert alert-warning">{{napaka}}</div>
+              %end
+              <div class="form-group">
+                <input type="username" class="form-control form-control-user" placeholder="Uporabniško ime" %if
+                  username: value="{{username}}" %end name="user" required autofocus>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control form-control-user" placeholder="E-poštni naslov" %if mail:
+                  value="{{mail}}" %end name="mail" required>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="password" class="form-control form-control-user" placeholder="Geslo" name="psw1"
+                    required>
+                </div>
+                <div class="col-sm-6">
+                  <input type="password" class="form-control form-control-user" placeholder="Ponovno geslo" name="psw2"
+                    required>
+                </div>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Prijavi račun </button>
+            </form>
+            <hr>
+            <div class="text-center">
+              <a class="small" href="forgot-password.html">Pozabljeno geslo?</a>
+            </div>
+            <div class="text-center">
+              <a class="small" href="/login/">Že imate račun? Prijava</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

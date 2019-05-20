@@ -1,1 +1,6 @@
 auth.py
+.vscode/
+__pycache__/
+env/
+debug.log
+pythondb/__pycache__/

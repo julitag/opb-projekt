@@ -1,0 +1,57 @@
+%rebase('osnova.html', naslov='Prijava')
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <img src="/static/img/boardgame1.jpg", width="450", height="400">
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Dobrodošel</h1>
+                  </div>
+
+                  <form class="user" role="form" method="post" action=".">
+                      <!-- napaka nastavljena po defaultu nastavljena na None, ob nepravilnem vpisu javi napako -->
+                      %if napaka:
+                      <div class="alert alert-warning">{{napaka}}</div>
+                      %end
+                      <!-- placeholder: kar je napisano v okencku; name: ime, ki ga damo temu inputu; if username: ce je pri klicu templeta definiran usernam, ga kar vzamemo kot vrednost inputa, po defaultu je sicer nastavljen na None-->
+                      <div class="form-group">
+                      <input type="text" class="form-control form-control-user" placeholder="Uporabniško ime" name="user" required autofocus
+                             %if username:
+                             value="{{username}}"
+                             %end
+                             >
+                      </div>
+                      <div class="form-group">
+                      <input type="password" class="form-control form-control-user" placeholder="Geslo" name="psw" required>
+                      </div>
+                      <div class="form-group">
+                          <button class="btn btn-primary btn-block" type="submit" style="width: 345px;">Prijava</button>
+                      </div>
+                    </form>
+                  <div class="text-center">
+                    <a class="small" href="/register/">Ustvari uporabniško ime</a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
