@@ -1,11 +1,633 @@
-Igra,Min. st. igralcev,Max. st. igralcev,Min cas,Max. cas,Leto izdaje,Min. starost
-Gloomhaven,1,4,60,120,2017,12
-Pandemic Legacy: Season 1,2,4,60,60,2015,13
-Through the Ages: A New Story of Civilization,2,4,120,120,2015,14
-Terraforming Mars,1,5,120,120,2016,12
-Twilight Struggle,2,2,120,180,2005,13
-Star Wars: Rebellion,2,4,180,240,2016,14
-Gaia Project,1,4,60,150,2017,12
-Scythe,1,5,90,115,2016,14
-Twilight Imperium (Fourth Edition),3,6,240,480,2017,14
-Great Western Trail,2,4,75,150,2016,12
+Igra,Min. st. igralcev,Max. st. igralcev,Min cas,Max. cas,Leto izdaje,Min. starost,Osnova/Dodatek
+Gloomhaven,1,4,60,120,2017,12,O
+Pandemic Legacy: Season 1,2,4,60,,2015,13,O
+Through the Ages: A New Story of Civilization,2,4,120,,2015,14,O
+Terraforming Mars,1,5,120,,2016,12,O
+Twilight Struggle,2,2,120,180,2005,13,O
+Star Wars: Rebellion,2,4,180,240,2016,14,O
+Gaia Project,1,4,60,150,2017,12,O
+Scythe,1,5,90,115,2016,14,O
+Twilight Imperium (Fourth Edition),3,6,240,480,2017,14,O
+Great Western Trail,2,4,75,150,2016,12,O
+Terra Mystica,2,5,60,150,2012,12,O
+War of the Ring (Second Edition),2,4,150,180,2012,13,O
+The Castles of Burgundy,2,4,30,90,2011,12,O
+Brass: Birmingham,2,4,60,120,2018,14,O
+Spirit Island,1,4,90,120,2017,13,O
+7 Wonders Duel,2,2,30,,2015,10,O
+Concordia,2,5,100,,2013,13,O
+The 7th Continent,1,4,5,1000,2017,14,O
+Viticulture Essential Edition,1,6,45,90,2015,13,O
+Arkham Horror: The Card Game,1,2,60,120,2016,14,O
+Puerto Rico,3,5,90,150,2002,12,O
+Brass: Lancashire,2,4,60,120,2007,14,O
+Caverna: The Cave Farmers,1,7,30,210,2013,12,O
+Mage Knight Board Game,1,4,60,240,2011,14,O
+Agricola,1,5,30,150,2007,12,O
+Orléans,2,4,90,,2014,12,O
+Mansions of Madness: Second Edition,1,5,120,180,2016,14,O
+A Feast for Odin,1,4,30,120,2016,12,O
+Food Chain Magnate,2,5,120,240,2015,14,O
+Blood Rage,2,4,60,90,2015,14,O
+Mechs vs. Minions,2,4,60,90,2016,14,O
+Pandemic Legacy: Season 2,2,4,60,,2017,14,O
+Kingdom Death: Monster,1,4,60,180,2015,17,O
+Star Wars: Imperial Assault,2,5,60,120,2014,14,O
+Power Grid,2,6,120,,2004,12,O
+Through the Ages: A Story of Civilization,2,4,240,,2006,12,O
+Azul,2,4,30,45,2017,8,O
+Tzolk'in: The Mayan Calendar,2,4,90,,2012,13,O
+Eclipse,2,6,60,180,2011,14,O
+Le Havre,1,5,30,150,2008,12,O
+Robinson Crusoe: Adventures on the Cursed Island,1,4,60,120,2012,14,O
+The Voyages of Marco Polo,2,4,40,100,2015,12,O
+Clans of Caledonia,1,4,30,120,2017,12,O
+Android: Netrunner,2,2,45,,2012,14,O
+7 Wonders,2,7,30,,2010,10,O
+Keyflower,2,6,90,120,2012,12,O
+Anachrony,1,4,30,120,2017,15,O
+Race for the Galaxy,2,4,30,60,2007,12,O
+Caylus,2,5,60,150,2005,12,O
+Dominant Species,2,6,120,240,2010,14,O
+Fields of Arle,1,2,60,120,2014,13,O
+Lords of Waterdeep,2,5,60,120,2012,12,O
+Root,2,4,60,90,2018,10,O
+Rising Sun,3,5,90,120,2018,14,O
+Twilight Imperium (Third Edition),3,6,180,240,2005,14,O
+Five Tribes,2,4,40,80,2014,13,O
+Wingspan,1,5,40,70,2019,10,O
+Eldritch Horror,1,8,120,240,2013,14,O
+El Grande,2,5,60,120,1995,12,O
+Codenames,2,8,15,,2015,14,O
+Clank!: A Deck-Building Adventure,2,4,30,60,2016,12,O
+Dominion: Intrigue,2,4,30,,2009,13,O
+Patchwork,2,2,15,30,2014,8,O
+The Gallerist,1,4,60,150,2015,13,O
+Mombasa,2,4,75,150,2015,12,O
+Battlestar Galactica: The Board Game,3,6,120,300,2008,10,O
+Roll for the Galaxy,2,5,45,,2014,13,O
+Troyes,2,4,90,,2010,12,O
+Sherlock Holmes Consulting Detective: The Thames Murders & Other Cases,1,8,60,120,1981,10,O
+T.I.M.E Stories,2,4,90,,2015,12,O
+Russian Railroads,2,4,90,120,2013,12,O
+Tigris & Euphrates,2,4,90,,1997,12,O
+Trajan,2,4,60,120,2011,12,O
+Star Wars: X-Wing Miniatures Game,2,2,30,45,2012,14,O
+Pandemic,2,4,45,,2008,8,O
+Dominion,2,4,30,,2008,13,O
+Dead of Winter: A Crossroads Game,2,5,60,120,2014,13,O
+Lisboa,1,4,60,120,2017,12,O
+Crokinole,2,4,30,,1876,8,O
+Kemet,2,5,90,120,2012,13,O
+Pandemic: Iberia,2,5,45,,2016,8,O
+Agricola (Revised Edition),1,4,30,120,2016,12,O
+Descent: Journeys in the Dark (Second Edition),2,5,120,,2012,14,O
+Forbidden Stars,2,4,120,180,2015,14,O
+Stone Age,2,4,60,90,2008,10,O
+Raiders of the North Sea,2,4,60,120,2015,12,O
+Alchemists,2,4,120,,2014,13,O
+Aeon's End,1,4,60,,2016,14,O
+Yokohama,2,4,90,,2016,14,O
+Star Realms,2,2,20,,2014,12,O
+War of the Ring (First Edition),2,4,120,,2004,12,O
+Legendary Encounters: An Alien Deck Building Game,1,5,30,60,2014,17,O
+Champions of Midgard,2,4,60,90,2015,10,O
+Castles of Mad King Ludwig,1,4,90,,2014,13,O
+Istanbul,2,5,40,60,2014,10,O
+A Game of Thrones: The Board Game (Second Edition),3,6,120,240,2011,14,O
+The Resistance: Avalon,5,10,30,,2012,13,O
+Santorini,2,4,20,,2016,8,O
+Grand Austria Hotel,2,4,60,120,2015,12,O
+Architects of the West Kingdom,1,5,60,80,2018,12,O
+Gloomhaven: Forgotten Circles,1,4,60,120,2019,12,D
+Gloomhaven: Solo Scenarios,1,1,,,2017,12,D
+Gloomhaven: The End of the World (Promo Scenario),1,4,60,120,2017,12,D
+Terraforming Mars: Gathering of Friends Promo Card,1,5,120,,2019,12,D
+Terraforming Mars: Turmoil,1,5,120,,2019,12,D
+Terraforming Mars: Atmo Collectors Promo Card,1,5,120,,2018,12,D
+Terraforming Mars: BGG User-Created Corporation Pack,1,5,120,,2018,12,D
+Terraforming Mars: Colonies,1,5,120,,2018,12,D
+Terraforming Mars: Jovian Lanterns Promo Card,1,5,120,,2018,12,D
+Terraforming Mars: Lunar Exports Promo Card,1,5,120,,2018,12,D
+Terraforming Mars: Prelude,1,5,90,120,2018,12,D
+Terraforming Mars: Hellas & Elysium,1,5,90,120,2017,12,D
+Terraforming Mars: Penguins Promo Card,1,5,90,120,2017,10,D
+Twilight Struggle: Turn Zero and Promo Packs,2,2,,360,2017,13,D
+Twilight Struggle: Regime of the Colonels Promo Card,2,2,120,180,2016,13,D
+Twilight Struggle: Promo Deck,2,2,,,2015,,D
+Twilight Struggle: Turn Zero,2,2,180,,2015,13,D
+"Twilight Struggle: ""Pakt Bagdadzki"" and ""Stan Wojenny"" Promo Cards",2,2,,,2013,,D
+"Twilight Struggle: ""Referendum NATO"" Promo Card",2,2,,,2012,,D
+"Twilight Struggle: ""Anni di Piombo"" Promo Card",2,2,,,2011,,D
+"Twilight Struggle: ""Gladio"" Promo Card",2,2,120,180,2011,13,D
+"Twilight Struggle: ""Финляндизация"" Promo Card",2,2,120,180,201,13,D
+Star Wars: Rebellion – Rise of the Empire,2,4,180,240,2017,14,D
+Scythe: Modular Board,1,5,90,115,2019,14,D
+Scythe: Bonus Promo Pack – 6 Promo Encounter Cards numbers 37-42,1,7,75,150,2018,14,D
+Scythe: Encounters,1,7,90,115,2018,14,D
+Scythe: The Rise of Fenris,1,5,75,150,2018,12,D
+Scythe: Promo Pack #11 – Encounter Card 39,1,5,90,115,2017,14,D
+Scythe: Promo Pack #12 – Encounter Card 40,1,7,90,115,2017,,D
+Scythe: Promo Pack #13 – Encounter Card 41,1,7,,,2017,14,D
+Scythe: Promo Pack #14 – Encounter Card 42,1,7,75,150,2017,14,D
+Scythe: The Wind Gambit,1,7,70,140,2017,14,D
+Scythe: Invaders from Afar,1,7,90,140,2016,14,D
+Brettspiel Adventskalender 2018,,,,,2018,,D
+Great Western Trail: At the Poker Table,2,4,75,150,2018,12,D
+Great Western Trail: Rails to the North,2,4,75,150,2018,14,D
+Deutscher Spielepreis 2017 Goodie Box,,,,,2017,,D
+Great Western Trail: Promo Station Master Tiles,2,4,75,150,2017,12,D
+Great Western Trail: The Eleventh Building Tile,2,4,75,150,2017,12,D
+Terra Mystica: Erweiterungsbogen,,,,,2015,,D
+Terra Mystica: Fire & Ice,2,5,100,,2014,12,D
+Terra Mystica: 4 Town Tiles,2,5,100,,2013,12,D
+Terra Mystica: Bonus Card Shipping Value,2,5,100,,2013,12,D
+War of the Ring: Warriors of Middle-earth,,,,,2016,,D
+War of the Ring: Warriors of Middle-earth – Tidings Not Burdens Mini-Expansion,2,4,180,,2016,12,D
+War of the Ring: Lords of Middle-earth,2,4,180,,2012,13,D
+War of the Ring: Lords of Middle-earth – Treebeard Mini-Expansion,2,4,180,,2012,12,D
+War of the Ring: Scenario – The Breaking of the Fellowship,2,4,120,180,2012,14,D
+Brettspiel Adventskalender 2018,,,,,2018,,D
+The Castles of Burgundy: 10th Expansion – Solo,1,1,30,90,2018,12,D
+Brettspiel Adventskalender 2017,,,,,2017,,D
+The Castles of Burgundy: 8th Expansion – Trade Routes,2,4,,,2017,8,D
+The Castles of Burgundy: 9th Expansion – The Team Game,4,4,30,90,2017,13,D
+The Castles of Burgundy: 7th Expansion – German Board Game Championship Board 2016,2,4,90,,2016,12,D
+Brettspiel Adventskalender 2015,,,,,2015,,D
+The Castles of Burgundy: 6th Expansion – The Cloisters,2,4,30,90,2015,12,D
+The Castles of Burgundy: 5th Expansion – Pleasure Garden,2,4,90,,2014,12,D
+Stadt Land Spielt Limitierter Sonderdruck Tag des Gesellschaftsspiels,,,,,2014,,D
+Spirit Island: Jagged Earth,1,6,90,120,2020,13,D
+Spirit Island: Promo Pack 2,1,4,90,120,2020,13,D
+Spirit Island: Unter der Insel schlummernde Schlange Promo,1,4,,,2018,,D
+Spirit Island: Branch & Claw,1,4,90,120,2017,13,D
+Spirit Island: Champions of the Dahan Token Pack,5,6,90,120,2017,13,D
+Spirit Island: Expansion Playmat,5,6,90,120,2017,13,D
+Spirit Island: Promo Pack 1,1,4,90,120,2017,13,D
+Leaders (fan expansion to  7 Wonders Duel),2,2,30,,2019,10,D
+7 Wonders Duel: Pantheon,2,2,30,45,2016,10,D
+7 Wonders Duel: Statue of Liberty,2,2,30,,2016,10,D
+7 Wonders Duel: The Messe Essen Promo Card,2,2,30,,2015,10,D
+Concordia: Venus (expansion),2,6,60,120,2018,12,D
+Concordia: Aegyptus / Creta,2,5,60,120,2017,12,D
+Concordia: 8 Forum Cards mini-expansion,2,5,60,,2016,12,D
+Concordia: Gallia / Corsica,2,5,,,2016,,D
+Concordia: Salsa,2,5,90,,2015,12,D
+Concordia: Britannia / Germania,2,5,100,,2014,12,D
+The 7th Continent: Comfort Creatures,1,4,5,1000,2019,14,D
+The 7th Continent: The Flying Roots,1,4,5,1000,2019,12,D
+"The 7th Continent: What Goes Up, Must Come Down",1,4,5,1000,2019,14,D
+The 7th Continent: BGG Promo Cards,1,4,5,1000,2017,14,D
+The 7th Continent: Facing the Elements,1,4,5,1000,2017,14,D
+The 7th Continent: Fear the Devourers,1,4,5,1000,2017,14,D
+The 7th Continent: Path of Repentance,1,4,5,1000,2017,14,D
+The 7th Continent: Swamp of Madness,1,4,5,1000,2017,14,D
+The 7th Continent: The Forbidden Sanctuary,1,4,5,1000,2017,14,D
+The 7th Continent: The Icy Maze,1,4,5,1000,2017,14,D
+Viticulture: Visit from the Rhine Valley,1,6,60,90,2018,12,D
+Tuscany Essential Edition,1,6,60,150,2016,14,D
+Viticulture: Moor Visitors Expansion,1,6,45,90,2016,13,D
+Viticulture: Arboriculture Expansion,2,6,75,,2013,10,D
+Viticulture: Kickstarter Promotional Cards,2,6,,,2013,,D
+Arkham Horror: The Card Game – Before the Black Throne: Mythos Pack,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – For the Greater Good: Mythos Pack,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – In The Clutches of Chaos: Mythos Pack,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – Return to the Path to Carcosa,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – The Circle Undone: Expansion,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – The Secret Name: Mythos Pack,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – The Wages of Sin: Mythos Pack,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – Union and Disillusion: Mythos Pack,1,2,60,120,2019,14,D
+Arkham Horror: The Card Game – Beta Cards from Arkham Night 2018,1,2,60,120,2018,14,D
+Arkham Horror: The Card Game – Black Stars Rise: Mythos Pack,1,2,60,120,2018,14,D
+Puerto Rico: Expansions 1&2 – The New Buildings & The Nobles,2,5,90,,2019,10,D
+Puerto Rico: Expansion II – The Nobles,2,5,90,,2009,12,D
+Treasure Chest,2,6,75,,2009,9,D
+Haiti (fan expansion for Puerto Rico),3,5,90,,2008,12,D
+Puerto Rico: Expansion I – New Buildings,2,5,90,,2004,10,D
+Brass: 2-player board,2,2,60,120,2015,12,D
+Catalonia (fan expansion for Brass),3,4,120,,2010,13,D
+Caverna: The Forgotten Folk,1,7,30,210,2018,12,D
+Caverna: The Forgotten Folk – Adventurers Promo,1,7,30,210,2018,12,D
+Caverna: The Forgotten Folk – Halflings promo,1,7,30,210,2018,12,D
+Caverna: Water Expansion,1,7,30,120,2015,12,D
+Caverna: Christmas Chamber,1,7,30,210,2014,12,D
+Caverna: LARP and Cosplay Postcard,1,7,30,210,2014,12,D
+Caverna: Mini Expansion,1,7,30,210,2014,12,D
+Mage Knight Board Game: Dual Color Cards Expansion,1,4,60,240,2019,14,D
+Mage Knight Board Game: Shades of Tezla Expansion,1,5,60,240,2015,14,D
+Mage Knight Board Game: Krang Character Expansion,1,5,90,,2013,14,D
+Mage Knight Board Game: The Lost Legion Expansion,1,5,240,,2012,14,D
+Agricola: Changelings,1,5,30,150,2018,12,D
+Agricola: Glon­na­cker,1,5,30,150,2015,12,D
+Agricola: France Deck,1,5,90,,2014,13,D
+Agricola: Bielefeld Deck,1,5,,,2013,,D
+Agricola: Belgium Deck,1,5,180,,2012,13,D
+Agricola: Brakelhühner Promo Card,1,5,120,,2012,12,D
+Agricola: De Lage Landen,1,5,120,,2012,12,D
+Agricola: Pi-Deck,1,5,120,,2012,12,D
+Agricola Ereigniskarten,1,5,120,,2011,12,D
+Agricola: NL-Deck,1,5,30,150,2011,12,D
+Orléans: 5th Player Box,1,5,90,,2018,12,D
+Orléans: L'évêché de Tours,2,4,90,,2018,12,D
+Orléans: Promo Ortskarten N°2,2,4,90,,2018,14,D
+Orléans: Drawbridge,2,4,,,2017,12,D
+Orléans: Neue Ortskarten N°5,2,4,90,,2017,14,D
+Orléans: Opera,2,4,90,,2017,12,D
+Orléans: Promo Ortskarten N°1,2,4,90,,2017,14,D
+Orléans: Neue Ortskarten N°4,2,4,90,,2016,14,D
+Orléans: Prairie,2,4,,,2016,12,D
+Orléans: Trade & Intrigue,2,5,90,,2016,12,D
+Mansions of Madness: Second Edition – Horrific Journeys: Expansion,1,5,120,180,2018,14,D
+Mansions of Madness: Second Edition – Sanctum of Twilight: Expansion,1,5,120,180,2018,14,D
+Mansions of Madness: Second Edition – Beyond the Threshold: Expansion,1,5,120,180,2017,14,D
+Mansions of Madness: Second Edition – Streets of Arkham: Expansion,1,5,120,180,2017,14,D
+Mansions of Madness: Second Edition – Recurring Nightmares: Figure and Tile Collection,1,5,120,180,2016,14,D
+Mansions of Madness: Second Edition – Suppressed Memories: Figure and Tile Collection,1,5,120,180,2016,13,D
+A Feast for Odin: The Norwegians,1,4,30,120,2018,12,D
+Deutscher Spielepreis 2017 Goodie Box,,,,,2017,,D
+"A Feast for Odin: Lofoten, Orkney, and Tierra del Fuego",1,4,30,120,2017,12,D
+A Feast for Odin: New Special Tiles,1,4,30,120,2017,12,D
+Food Chain Magnate: The Ketchup Mechanism & Other Ideas,2,6,120,240,2019,14,D
+Blood Rage: Hili – The Even-Handed,2,4,60,90,2016,13,D
+Blood Rage: 5th Player Expansion,5,5,60,90,2015,13,D
+Blood Rage: Gods of Ásgard,2,4,60,90,2015,13,D
+Blood Rage: Kickstarter Exclusives,2,4,60,90,2015,13,D
+Blood Rage: Mystics of Midgard,2,4,60,90,2015,13,D
+Kingdom Death: Monster – Abyssal Woods Expansion,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Ancient Root,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Anonymous Survivor Promo,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Black Knight Expansion,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Campaigns of Death Expansion,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Corsair Coat,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Death Armor Expansion,1,6,60,180,2019,17,D
+Kingdom Death: Monster – False Messengers Promo,1,6,60,180,2019,17,D
+Kingdom Death: Monster – First Hero Expansion,1,6,60,180,2019,17,D
+Kingdom Death: Monster – Frogdog Expansion,1,6,60,180,2019,17,D
+Star Wars: Imperial Assault – Coruscant Back Alleys Skirmish Map,2,2,60,120,2019,14,D
+Star Wars: Imperial Assault – Endor Defense Station Skirmish Map,2,2,60,120,2019,14,D
+Star Wars: Imperial Assault – Ezra Bridger and Kanan Jarrus Ally Pack,2,5,60,120,2018,14,D
+Star Wars: Imperial Assault – Hondo Ohnaka Villain Pack,2,5,60,120,2018,14,D
+Star Wars: Imperial Assault – Sabine Wren and Zeb Orrelios Ally Pack,2,5,60,120,2018,14,D
+Star Wars: Imperial Assault – Thrawn Villain Pack,2,5,60,120,2018,14,D
+Star Wars: Imperial Assault – Tyrants of Lothal,2,5,60,120,2018,14,D
+Star Wars: Imperial Assault – Ahsoka Tano Ally Pack,2,5,60,,2017,10,D
+Star Wars: Imperial Assault – Alliance Rangers Ally Pack,2,5,,,2017,12,D
+Star Wars: Imperial Assault – BT-1 and 0-0-0 Villain Pack,2,5,60,120,2017,14,D
+Power Grid: Fabled Expansion,2,6,120,,2017,12,D
+Brettspiel Adventskalender 2015,,,,,2015,,D
+Power Grid: High-Voltage DC Transmission Passage C,2,6,120,,2015,12,D
+Power Grid: The Stock Companies,2,6,120,,2015,13,D
+Power Grid: Australia & Indian Subcontinent,2,6,120,,2013,13,D
+Power Grid: Taxes,2,6,120,,2013,12,D
+Power Grid: Northern Europe/United Kingdom & Ireland,2,6,120,,2012,13,D
+Power Grid: Oracle & Industrial Espionage,2,6,120,,2012,12,D
+Power Grid: Québec/Baden-Württemberg,2,6,120,,2012,13,D
+Funkenschlag: Speicherkraftwerk,2,6,120,,2011,12,D
+Through the Ages: Spanish Promo Card Set,2,4,240,,2012,12,D
+Cywilizacja: Poprzez wieki – Polski dodatek 2,2,4,240,,2011,12,D
+BGO Extended 2.0 expansion (fan expansion for Through the Ages),2,4,240,,2010,12,D
+Cywilizacja: Poprzez wieki – Polski dodatek 1,2,4,240,,2009,12,D
+Through the Ages: A Story of Civilization – Czech expansion,2,4,240,,2009,12,D
+Azul: Special Factories Promo,2,4,30,45,2018,8,D
+Deutscher Spielepreis 2018 Goodie Box,,,,,2018,,D
+Azul: Joker Tiles,2,4,30,45,2017,8,D
+Tzolk'in: The Mayan Calendar – Mini Expansion 2,2,4,90,,2013,13,D
+Tzolk'in: The Mayan Calendar – Tribes & Prophecies,2,5,90,,2013,13,D
+Tzolk'in: The Mayan Calendar – Mini Expansion 1,2,4,90,,2012,13,D
+Eclipse:  Anticipation of the Elders,2,6,60,200,2016,14,D
+Eclipse: Black Hole,,,,,2015,,D
+Eclipse: Gift of the Elders,2,9,60,200,2015,14,D
+Eclipse: Shadow of the Rift,2,6,120,,2015,14,D
+Eclipse: Nebula,2,6,120,,2014,14,D
+Eclipse: The Galactic North,2,9,,,2014,,D
+Eclipse: Minions of the Solstice,2,9,120,,2013,,D
+Eclipse: Ship Pack One,2,6,120,,2013,14,D
+Eclipse: Pulsar,2,6,120,,2012,14,D
+Eclipse: Rise of the Ancients,2,9,120,,2012,14,D
+Le Havre: Le Grand Hameau – Tablet with App,1,5,,,2012,,D
+Le Havre: Le Grand Hameau,1,5,150,,2010,12,D
+Le Havre: Le Grand Hameau – Rattletrap car,1,5,150,,2010,12,D
+Le Havre: Le Grand Hameau – Wholesale Bakery,1,5,150,,2010,12,D
+Le Havre: Spielemesse Sonderkarte,1,5,150,,2010,12,D
+Le Havre Expansion: Essen Promo Cards,1,5,150,,2008,,D
+Robinson Crusoe: Adventures on the Cursed Island – Mystery Tales,1,4,60,120,2019,14,D
+Robinson Crusoe: Przygoda na przeklętej wyspie – Kafel Wulkanu,1,4,60,120,2019,14,D
+Robinson Crusoe: Adventure in the Neverland Junior,1,4,60,120,2018,14,D
+"Robinson Crusoe: Adventures on the Cursed Island – ""Time Travel"" Scenario",1,4,60,120,2018,8,D
+Robinson Crusoe: Adventures on the Cursed Island – Hunting Adventures,1,4,60,120,2018,14,D
+Robinson Crusoe: Adventures on the Cursed Island – In-Store Event Kit,1,4,,,2018,,D
+Robinson Crusoe: Adventures on the Cursed Island – Mystery Cards I,1,4,90,180,2018,14,D
+Robinson Crusoe: Adventures on the Cursed Island – Shelter Upgrades,1,4,60,120,2018,8,D
+Robinson Crusoe: Adventures on the Cursed Island – Event Cards,1,4,90,180,2017,14,D
+Robinson Crusoe: Adventures on the Cursed Island – Herb Garden and Pen,1,4,60,120,2017,8,D
+The Voyages of Marco Polo: The Secret Paths of Marco Polo,2,4,40,100,2018,12,D
+The Voyages of Marco Polo: Agents of Venice,2,5,,,2017,,D
+The Voyages of Marco Polo: The New Characters,2,4,40,100,2015,12,D
+Downfall (Fan expansion for Android: Netrunner),2,2,,,2019,,D
+Android: Netrunner – Council of the Crest,2,2,45,,2018,14,D
+Android: Netrunner – Down the White Nile,2,2,30,60,2018,14,D
+Android: Netrunner – Kampala Ascendent,2,2,30,60,2018,14,D
+Android: Netrunner – Magnum Opus cards,2,2,45,,2018,,D
+Android: Netrunner – Reign and Reverie,2,2,30,60,2018,14,D
+Android: Netrunner – The Devil and the Dragon,2,2,30,60,2018,14,D
+Android: Netrunner – Whispers in Nalubaale,2,2,30,60,2018,14,D
+Android: Netrunner – Blood and Water,2,2,45,,2017,14,D
+Android: Netrunner – Crimson Dust,,,,,2017,,D
+7 Wonders: Armada,3,7,40,,2018,10,D
+7 Wonders: Babel,2,7,45,,2014,10,D
+Collection (fan expansion for 7 Wonders),2,9,45,,2014,,D
+7 Wonders: Wonder Pack,2,7,30,,2013,10,D
+Empires (fan expansion for 7 Wonders),3,8,60,,2013,,D
+Game Wonders (fan expansion for 7 Wonders),2,8,30,,2013,10,D
+7 Wonders: Cities,2,8,40,,2012,10,D
+Lost Wonders (fan expansion for 7 Wonders),2,8,30,,2012,10,D
+More Wonders... (fan expansion for 7 Wonders),2,7,30,,2012,10,D
+Myths (fan expansion for 7 Wonders),2,8,45,,2012,10,D
+Brettspiel Adventskalender 2018,,,,,2018,,D
+Keyflower: Boat 7,2,6,60,120,2018,14,D
+Keyflower: Delivery Man,2,6,90,12,2018,12,D
+Keyflower: Developer,2,6,90,120,2018,14,D
+Keyflower: Sorcerer,2,6,60,120,2018,14,D
+Keyflower: Keymelequin,2,6,90,120,2016,14,D
+Keyflower: Pig Shelter,2,6,90,120,2015,12,D
+Keyflower: Beekeeper,2,6,90,,2014,14,D
+Keyflower: The Merchants,2,6,90,,2014,14,D
+Keyflower: Trader,2,6,90,,2014,14,D
+Anachrony: Fractures of Time,1,4,90,150,2019,15,D
+Anachrony: The Sentry Post,1,4,30,120,2018,15,D
+Anachrony: Doomsday Enhancement Pack,1,4,60,120,2017,,D
+Anachrony: Exosuit Commander Pack,1,4,60,120,2017,15,D
+Race for the Galaxy: Retrofit Cards,1,5,60,,2019,12,D
+Race for the Galaxy: New Worlds Promo,1,5,60,,2017,12,D
+Race for the Galaxy: Xeno Invasion,2,5,30,60,2015,13,D
+Patronage (fan expansion to Race for the Galaxy),2,4,,,2013,,D
+Race for the Galaxy: Alien Artifacts,2,5,45,,2013,13,D
+Race for the Galaxy: The Brink of War,1,6,60,,2010,12,D
+Race for the Galaxy: Rebel vs Imperium,1,6,60,,2009,12,D
+Race for the Galaxy: The Gathering Storm,1,5,60,,2008,12,D
+Caylus Expansion: The Jeweller,2,5,120,,2005,,D
+Fields of Arle: New Travel Destination – Aachen,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Bad Wörishofen,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Baden,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Baltrum,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Kaiserslautern,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Würzburg,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Zürich,1,2,60,150,2018,12,D
+Fields of Arle: New Travel Destination – Ahrweiler,1,2,60,150,2017,12,D
+Fields of Arle: New Travel Destination – Arle,1,2,60,150,2017,12,D
+Fields of Arle: New Travel Destination – Basel,1,2,60,150,2017,12,D
+Lords of Waterdeep: Rapid Expansion Promo Card,2,5,60,120,2013,8,D
+Lords of Waterdeep: Scoundrels of Skullport,2,6,60,,2013,12,D
+Lords of Waterdeep: Inevitable Betrayal Promo Card,2,5,60,,2012,12,D
+Root: The Exiles and Partisans Deck,2,6,,,2019,13,D
+Root: The Underworld Expansion,2,4,60,90,2019,10,D
+Root: The Riverfolk Expansion,1,6,60,90,2018,10,D
+Rising Sun: Stronghold Pack,3,6,90,120,2019,14,D
+Raging Sun (fan expansion to Rising Sun),3,6,90,120,2018,14,D
+Rising Sun: Daimyo Box,3,6,90,120,2018,13,D
+Rising Sun: Dynasty Invasion,3,6,90,120,2018,14,D
+Rising Sun: Kami Unbound,3,5,90,120,2018,14,D
+Rising Sun: Monster Pack,3,5,90,120,2018,14,D
+Twilight Imperium (Third Edition): Shards of the Throne,3,8,180,240,2011,14,D
+Twilight Imperium (Third Edition): Shattered Empire,3,8,240,,2006,12,D
+Five Tribes: Galbells,2,4,60,,2017,13,D
+Five Tribes: Whims of the Sultan,2,5,40,90,2017,13,D
+Five Tribes: The Thieves of Naqala,2,4,40,80,2016,13,D
+Five Tribes: The Artisans of Naqala,2,4,40,80,2015,13,D
+Five Tribes: Wilwit,2,4,60,,2015,13,D
+Five Tribes: Dhenim,2,4,60,,2014,13,D
+Eldritch Horror: Masks of Nyarlathotep,1,8,120,240,2018,14,D
+Eldritch Horror: Cities in Ruin,1,8,120,240,2017,14,D
+Eldritch Horror: The Dreamlands,1,8,120,240,2017,14,D
+Eldritch Horror: Signs of Carcosa,1,8,120,240,2016,14,D
+Eldritch Horror: Strange Remnants,1,8,120,240,2015,14,D
+Eldritch Horror: Under the Pyramids,1,8,180,,2015,14,D
+Eldritch Horror: Forsaken Lore,1,8,180,,2014,14,D
+Eldritch Horror: Mountains of Madness,1,8,180,,2014,14,D
+The El Grande Expansions,2,5,90,,2000,12,D
+El Grande: Grandissimo,2,5,90,,2000,12,D
+El Grande: König & Intrigant – Player's Edition,2,5,120,,1998,12,D
+El Grande: Grossinquisitor und Kolonien,2,5,90,,1997,12,D
+El Grande: König & Intrigant,2,5,90,,1997,12,D
+El Grande: König & Intrigant – Unverkäufliche Sonderkarten,2,5,,,1997,12,D
+Brettspiel Adventskalender 2018,,,,,2018,,D
+Codenames: Bonuskaarten 2018,2,8,15,30,2018,14,D
+Codenames: Cartes promo – Univers Geek,2,8,15,30,2018,12,D
+Tajniacy: Obcy Agenci,2,8,15,,2018,14,D
+Codenames: Bonus Pack – Board Gaming (English),2,8,15,,2017,,D
+Fedőnevek: Magyar bónusz csomag,2,8,15,,2017,14,D
+Tajniacy: Nowi Agenci,2,8,15,30,2017,14,D
+Tajniacy: Sami Nieswoi,2,8,15,30,2017,14,D
+Codenames: Authors & Games,2,8,15,,2016,14,D
+Codenames: Bonus Pack – Board Gaming (German),2,8,15,,2016,14,D
+Clank! Legacy: Acquisitions Incorporated – Upper Management Pack,2,4,30,60,2019,12,D
+Clank! Expeditions: Gold and Silk,2,4,30,60,2018,12,D
+Clank!: Expedition Leader,2,4,30,60,2018,12,D
+Clank!: The Mummy's Curse,2,4,30,60,2018,12,D
+Clank!: Wand of Time,2,4,30,60,2018,12,D
+Brettspiel Adventskalender 2017,,,,,2017,,D
+Clank!: Brawn vs. Boots,2,4,30,60,2017,12,D
+Clank!: Enchanted Dice,1,4,30,60,2017,,D
+Clank!: Friendly Watcher,2,4,30,60,2017,12,D
+Clank!: Magic Spectacles,1,4,30,60,2017,12,D
+Dominion: Renaissance,2,4,30,,2018,14,D
+Dominion: Dismantle Promo Card,2,4,30,,2017,13,D
+Dominion: Erweiterung – Basisspiel & Die Intrige,2,4,,,2017,,D
+Dominion: Nocturne,2,6,30,,2017,14,D
+Pirate's Life (Fan Expansion to Dominion),2,4,30,,2017,13,D
+Dominion: Empires,2,4,30,,2016,14,D
+Dominion: Höflinge Promo Card,2,6,30,,2016,10,D
+Dominion: Intrigue Update Pack,2,4,30,,2016,,D
+Dominion: Sauna / Avanto Promo Card,2,4,30,,2016,13,D
+Dominion: Adventures,2,4,30,,2015,14,D
+Patchwork: Automa,1,1,15,30,2018,,D
+Patchwork: 5x5 Bonuskarte,2,2,15,30,2017,8,D
+Special Buttons (fan-expansion for Patchwork),2,4,25,45,2016,8,D
+The Gallerist: Scoring Expansion,1,4,60,150,2019,12,D
+The Gallerist: KS Stretch Goal Pack #2,1,4,,,2015,13,D
+Deutscher Spielepreis 2016 Goodie Box,,,,,2016,,D
+Mombasa: Cooked Books Mini Expansion,2,4,75,150,2016,12,D
+Mombasa: E1/E2 Company Track,2,4,75,150,2015,12,D
+Battlestar Galactica: The Board Game – Daybreak Expansion,3,7,180,,2013,14,D
+Battlestar Galactica: The Board Game – Exodus Expansion,3,6,180,,2010,13,D
+Battlestar Galactica: The Board Game – Pegasus Expansion,3,7,180,,2009,13,D
+Battlestar Galactica: Official Variant Rules,1,6,120,,2008,10,D
+Roll for the Galaxy: Rivalry,2,5,30,60,2019,14,D
+Roll for the Galaxy: Bountiful Gaming Grid Promo Tile,2,5,45,,2016,13,D
+Roll for the Galaxy: Terraforming Colony/Diversified Economy Promo Tile,2,5,45,,2016,13,D
+Roll for the Galaxy: Ambition,2,5,30,60,2015,14,D
+Troyes: The Ladies of Troyes,2,4,90,,2012,13,D
+Troyes: Bonus Cards,2,4,90,,2011,12,D
+Sherlock Holmes Consulting Detective: Murder Behind Closed Doors,1,8,,,2015,,D
+Sherlock Holmes Détective Conseil: L'Homme Sans Visage,1,8,60,,2014,12,D
+Sherlock Holmes Détective Conseil: Les Masques Africains,1,8,150,,2013,,D
+L'affaire Diavolo (Fan expansion for Sherlock Holmes Détective Conseil),1,8,,,2012,12,D
+Sherlock Holmes Consulente Investigativo: Il Mistero dell'Impiccato,1,8,60,,2012,12,D
+Sherlock Holmes Détective Conseil: La Piste Tordue,1,6,120,,2012,12,D
+Sherlock Holmes Détective Conseil: La rançon du diable,1,6,120,,2012,12,D
+Sherlock Holmes Détective Conseil: Octobre 1891,1,8,,,1991,,D
+Sherlock Holmes Détective Conseil: Oliver Stone,1,8,,,1990,,D
+Sherlock Holmes Consulting Detective: Adventures by Gaslight,1,6,180,,1986,10,D
+Antic (fan expansion for T.I.M.E Stories),3,4,120,240,2019,10,D
+T.I.M.E Stories: Madame,2,4,90,,2019,12,D
+T.I.M.E. Stories Revolution: The Hadal Project,2,4,90,,2019,14,D
+La Cavale des Daltons (fan expansion for T.I.M.E Stories),3,4,45,90,2018,10,D
+City of Souls (fan expansion for T.I.M.E Stories),2,4,,,2018,,D
+Dilemma (fan expansion for T.I.M.E Stories),2,4,,,2018,,D
+Dreamland (fan expansion for T.I.M.E Stories),2,4,,,2018,,D
+Geologists (fan expansion for T.I.M.E Stories),3,4,120,240,2018,10,D
+Hora fugit facta manent (fan expansion for T.I.M.E. Stories),2,4,300,540,2018,,D
+La manufacture Lilienfeld (fan expansion for T.I.M.E Stories),2,4,,,2018,,D
+Russian Railroads: Juri Dreigleisky,2,4,90,120,2017,12,D
+Russian Railroads: American Railroads,2,4,90,120,2016,12,D
+Russian Railroads: German Railroads,1,4,90,120,2015,12,D
+Russian Railroads: Mini-Expansion,2,4,90,,2014,12,D
+Euphrat & Tigris: Die Zikkurat,2,4,90,,2009,12,D
+Star Wars: X-Wing Miniatures Game – Saw's Renegades Expansion Pack,2,4,30,45,2018,14,D
+Star Wars: X-Wing Miniatures Game – TIE Reaper Expansion Pack,2,4,30,45,2018,14,D
+Star Wars: X-Wing Miniatures Game – Alpha-Class Star Wing Expansion Pack,2,2,45,,2017,14,D
+Star Wars: X-Wing Miniatures Game – Auzituck Gunship Expansion Pack,2,4,30,45,2017,14,D
+Star Wars: X-Wing Miniatures Game – C-ROC Cruiser Expansion Pack,2,4,30,45,2017,14,D
+Star Wars: X-Wing Miniatures Game – Guns for Hire Expansion Pack,2,2,,,2017,14,D
+Star Wars: X-Wing Miniatures Game – M12-L Kimogila Fighter Expansion Pack,2,2,45,,2017,14,D
+Star Wars: X-Wing Miniatures Game – Phantom II Expansion Pack,2,2,45,,2017,14,D
+Star Wars: X-Wing Miniatures Game – Resistance Bomber Expansion Pack,2,4,30,45,2017,14,D
+Star Wars: X-Wing Miniatures Game – Scurrg H-6 Bomber Expansion Pack,2,4,30,45,2017,14,D
+Pandemic: Gen Con 2016 Promos – Z-Force Team Member/Game Convention,1,4,30,60,2016,8,D
+Pandemic: Survival Promos – Crisis Mitigator/Relocation Specialist,1,4,30,60,2016,8,D
+Pandemic: Promo Roles,2,4,45,,2015,8,D
+Pandemic: State of Emergency,2,4,45,,2015,13,D
+Pandemic: In the Lab,1,6,45,60,2013,8,D
+Pandemic: On the Brink,2,5,45,,2009,8,D
+"Pandemie: Uitbreiding ""De Generalist""",2,5,45,,2009,10,D
+Dominion: Renaissance,2,4,30,,2018,14,D
+Dominion: Dismantle Promo Card,2,4,30,,2017,13,D
+Dominion: Erweiterung – Basisspiel & Die Intrige,2,4,,,2017,,D
+Dominion: Nocturne,2,6,30,,2017,14,D
+Pirate's Life (Fan Expansion to Dominion),2,4,30,,2017,13,D
+Animals expansion (mini fan expansion for Dominion),2,6,30,60,2016,8,D
+Dominion: Empires,2,4,30,,2016,14,D
+Dominion: Höflinge Promo Card,2,6,30,,2016,10,D
+Dominion: Intrigue (Second Edition),2,4,30,,2016,14,D
+Dominion: Intrigue Update Pack,2,4,30,,2016,,D
+Dead of Winter: Giggles,2,5,100,,2019,13,D
+Dead of Winter: A Crossroads Game – BGG Crossroads Promo,2,5,45,210,2017,14,D
+Dead of Winter: KD James,2,5,100,,2017,13,D
+Dead of Winter: Meryl Wolfe,2,5,100,,2017,13,D
+Dead of Winter: Ruckus Burley,2,5,,,2017,13,D
+Dead of Winter: Warring Colonies,4,11,45,120,2017,12,D
+Dead of Winter: Rich Sommer,2,5,100,,2016,13,D
+Dead of Winter: Rodney Smith,2,5,100,,2016,13,D
+Dead of Winter: Andrea Smith,2,5,100,,2015,12,D
+Dead of Winter: Dice Tower Crossroads Promo,2,5,100,,2015,13,D
+Kemet: Seth,3,6,90,120,2018,14,D
+Kemet: Dice Tower Promo 2016,2,5,60,120,2016,14,D
+Kemet: New Power Tiles,2,5,60,120,2015,14,D
+Kemet: Skills and Black Power Tile For Ta-Seti,2,5,60,120,2015,14,D
+Kemet: Ta-Seti,2,5,60,90,2015,14,D
+C3K: Creatures Crossover Cyclades/Kemet,2,5,90,,2013,13,D
+Agricola: Corbarius Deck,1,6,60,120,2019,12,D
+Agricola: Bubulcus Deck,1,6,60,120,2018,12,D
+Agricola: Changelings,1,5,30,150,2018,12,D
+Agricola: Farmers of the Moor,1,4,30,120,2018,12,D
+Agricola Game Expansion: Blue,,,30,120,2017,14,D
+Agricola Game Expansion: Green,,,30,120,2017,14,D
+Agricola Game Expansion: Purple,,,30,120,2017,14,D
+Agricola Game Expansion: Red,,,30,120,2017,14,D
+Agricola Game Expansion: White,,,30,120,2017,14,D
+Agricola Game Expansion: Yellow,,,30,120,2017,14,D
+Descent: Journeys in the Dark (Second Edition) – Lost Legends Expansion Pack,2,5,120,,2019,14,D
+Descent: Journeys in the Dark (Second Edition) – Road to Legend,1,4,,,2016,,D
+Descent: Journeys in the Dark (Second Edition) – Shards of Everdark,2,5,120,,2016,14,D
+Descent: Journeys in the Dark (Second Edition) – Stewards of the Secret,2,5,120,,2016,14,D
+Descent: Journeys in the Dark (Second Edition) – The Chains That Rust,2,5,120,,2016,10,D
+Descent: Journeys in the Dark (Second Edition) – Ardus Ix'Erebus Lieutenant Pack,2,5,120,,2015,14,D
+Descent: Journeys in the Dark (Second Edition) – Bonds of the Wild,2,5,120,,2015,14,D
+Descent: Journeys in the Dark (Second Edition) – Dark Elements,1,4,60,120,2015,14,D
+Descent: Journeys in the Dark (Second Edition) – Heirs of Blood,2,5,,,2015,14,D
+Descent: Journeys in the Dark (Second Edition) – Kyndrithul Lieutenant Pack,2,5,120,,2015,14,D
+Stone Age: The Mammoth Herd,2,4,50,80,2017,,D
+Stadt Land Spielt Limitierte Sonderdrucke 2013,,,,,2013,,D
+Stone Age: Casino,2,5,60,,2013,10,D
+Schmuck und Handel (fan expansion for Stone Age),2,6,60,180,2011,10,D
+Stone Age: The Expansion,2,5,60,90,2011,13,D
+Stone Age: The New Huts,2,4,60,,2008,,D
+Garphill Games 5-Year Anniversary Promo Pack,,,,,2019,,D
+Raiders of the North Sea: Garphill Games 5-Year Anniversary Promos,2,4,60,120,2019,12,D
+Raiders of the North Sea: Ceedee Promo Card,2,4,60,120,2018,12,D
+Raiders of the North Sea: Fields of Fame,2,5,60,90,2018,12,D
+Raiders of the North Sea: Hall of Heroes,2,5,60,90,2018,12,D
+Raiders of the North Sea: Jarl Promo,2,6,60,80,2018,12,D
+Raiders of the North Sea: Outsiders,2,4,60,80,2018,12,D
+Raiders of the North Sea: Solo Variant,1,1,30,50,2018,12,D
+Raiders of the North Sea: The Meeple Men Promo Card,2,4,60,120,2018,12,D
+Raiders of the North Sea: The Mico Promo,2,4,60,80,2017,12,D
+Alchemists: The King's Golem,2,4,120,,2016,14,D
+Alchemists: Publisher,2,4,120,,2015,13,D
+Alchemists: Ring of Favor,2,4,90,,2014,13,D
+Aeon's End: Buried Secrets,1,4,60,,2019,14,D
+Aeon's End: Echo Stone and Splinter Missile Promo,1,4,45,90,2019,14,D
+Aeon's End: The Ancients,1,4,60,,2019,14,D
+Aeon's End: Thieving Spirit,1,4,60,,2018,14,D
+Aeon's End: Tabletop Day 2017 Promos – Drown in Flames / Glyph Enigma,1,4,60,,2017,14,D
+Aeon's End: The Nameless,1,4,60,,2017,14,D
+Aeon's End: The Outer Dark,1,4,60,,2017,14,D
+Aeon's End: The Void,1,4,60,,2017,14,D
+Aeon's End: War Eternal – Promo Pack,1,4,60,,2017,14,D
+Aeon's End: Fleeting Vision Promo,1,4,60,,2016,14,D
+Yokohama: Achievements & Free Agents Promo,2,4,,,2017,,D
+Star Realms: Command Deck – Lost Fleet,2,4,20,,2018,12,D
+Star Realms: Command Deck – The Alignment,2,4,20,,2018,12,D
+Star Realms: Command Deck – The Alliance,2,4,20,,2018,12,D
+Star Realms: Command Deck – The Coalition,2,4,20,,2018,12,D
+Star Realms: Command Deck – The Pact,2,4,20,,2018,12,D
+Star Realms: Command Deck – The Union,2,4,20,,2018,12,D
+Star Realms: Command Deck – The Unity,2,4,20,,2018,12,D
+Star Realms: Frontiers – Kickstarter Promos,1,4,20,45,2018,12,D
+Star Realms: Merc Destroyer Promo Card,2,2,20,,2018,12,D
+Star Realms: Merc Tower Promo Card,2,2,20,,2018,12,D
+War of the Ring: Scenario – The Breaking of the Fellowship,2,4,120,180,2012,14,D
+War of the Ring: Battles of the Third Age,2,4,180,,2006,12,D
+Legendary Encounters: An Alien Deck Building Game Expansion,1,5,45,,2016,14,D
+Legendary Encounters: ALIEN Conversion Kit,1,5,45,120,2015,17,D
+Champions of Midgard: Asian Monsters,2,4,60,90,2018,10,D
+Champions of Midgard: Bjorn Hammerblow the Fantastic promo,2,4,60,90,2018,10,D
+Champions of Midgard: Gullinkambi Public Boat Promo,2,4,60,90,2018,10,D
+Champions of Midgard: Meeple Monster Promo Card,2,4,60,90,2018,10,D
+Champions of Midgard: Mercenaries Land Journey Promo Card,2,4,60,90,2018,10,D
+Champions of Midgard: Merchant Ship Promo Cards,2,4,60,90,2018,10,D
+Champions of Midgard: Shipwreck Journey Promo Cards,2,4,60,90,2018,10,D
+Champions of Midgard: Draudan and Bergrisar King Promo Cards,2,4,60,90,2017,10,D
+Champions of Midgard: Jarl Edition,2,5,60,90,2017,10,D
+Champions of Midgard: The Dark Mountains,2,5,60,90,2017,10,D
+Castles of Mad King Ludwig: Secrets,1,4,45,90,2015,13,D
+Zamki szalonego króla Ludwika: Polskie zamki,1,4,90,,2015,13,D
+Camel Up: The Referee Camel & Istanbul – Caravan Leader Mini Expansion,,,,,2017,,D
+Brettspiel Adventskalender 2016,,,,,2016,,D
+Istanbul: Caravan Leader Mini Expansion,,,,,2016,,D
+Istanbul: Letters & Seals,2,5,40,60,2016,10,D
+Istanbul: Pegasus Depot Mini Expansion,2,5,40,60,2016,10,D
+Istanbul: Mocha & Baksheesh,2,5,40,60,2015,10,D
+Istanbul: Kebab Shop Mini Expansion,2,5,50,,2014,10,D
+A Game of Thrones: The Board Game (Second Edition) – Mother of Dragons,3,8,120,240,2018,14,D
+A Game of Thrones: The Board Game (Second Edition) – A Feast for Crows,4,4,120,,2013,14,D
+A Game of Thrones: The Board Game (Second Edition) – A Dance with Dragons,6,6,180,,2012,14,D
+The Resistance: Avalon Promos,5,10,30,,2012,13,D
+Santorini: Asteria,2,4,20,,2018,8,D
+Santorini: Hippolyta,2,4,20,,2018,8,D
+Santorini: Hydra,2,4,20,,2018,8,D
+Santorini: Iris,2,4,20,,2018,8,D
+Santorini: Nyx,2,4,20,,2018,8,D
+Santorini: Pegasus,2,4,20,,2018,8,D
+Santorini: Promo Pack,2,4,20,,2018,8,D
+Santorini: Castor & Pollux,2,4,20,,2017,8,D
+Santorini: Eris,2,4,20,,2017,10,D
+Santorini: Golden Fleece,2,4,20,,2017,8,D
+Grand Austria Hotel: Herr Moras,2,4,60,120,2017,12,D
+Grand Austria Hotel: Mag. Ferdinand,2,4,60,120,2017,12,D
+Architects of the West Kingdom: Garphill Games 5-Year Anniversary Promos,1,5,60,80,2019,12,D
+Architects of the West Kingdom: Paladins Apprentices,1,5,60,80,2019,12,D
+Garphill Games 5-Year Anniversary Promo Pack,,,,,2019,,D
+Architects of the West Kingdom: Extra Apprentices,1,5,60,80,2018,12,D
+Architects of the West Kingdom: Extra Buildings,1,5,60,80,2018,12,D
+Architects of the West Kingdom: Extra Player Boards,1,5,60,80,2018,12,D

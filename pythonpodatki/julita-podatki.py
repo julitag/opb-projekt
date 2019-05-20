@@ -1,4 +1,3 @@
-print ("1")
 import requests
 import bs4
 import re
@@ -27,7 +26,6 @@ publisher = []
 ## dodatki
 dodatki_ime = []
 dodatki_url = []
-dodatki_letnica = []
 
 ## range(n) za top n * 100 iger
 for i in range(1):
@@ -42,8 +40,6 @@ for i in range(1):
         titles.append(title[0])
         release.append(int(re.search(r'\d+', title[1]).group()))
 
-    titles = titles[0:10]
-
     ## podtabele, zacetna in nato po ena za vsako izmed 100 iger
     table = soup.find(lambda tag: tag.name == "table" and tag.has_attr("id") and tag["id"] == "collectionitems")
     rows = table.find_all(lambda tag: tag.name == "tr")
@@ -55,29 +51,25 @@ for i in range(1):
         games.append(a["href"])
 
     # končnice, imena in letnice dodatkov iger
-    for game in games[0:10]:
+    for game in games:
         browser.get("https://boardgamegeek.com" + game + "/expansions")
         s = bs4.BeautifulSoup(browser.page_source, "html.parser")
         collection = s.find_all("div", class_ = "summary-item-title summary-item-title-separated")
         
         expan_ime = []
-        expan_letnice = []
-
         for i in collection:
             ime = []
             ime.extend(i.stripped_strings)
             expan_ime.append(ime[0])
-            expan_letnice.append(int(re.search(r'\d+', ime[1]).group()))
+            release.append(int(re.search(r'\d+', ime[1]).group()))
 
         dodatki_ime.append(expan_ime)
-        dodatki_letnica.append(expan_letnice)
-
         ## seznam web page koncnic dodatkov
         for row in collection:
             a = row.find("a", href = True)
             dodatki_url.append(a["href"])
 
-    for game in games[0:10]+dodatki_url:
+    for game in games+dodatki_url:
         ## web page trenutne igre, ki se ga ustvari na webdriverju
         browser.get("https://boardgamegeek.com" + game)
         s = bs4.BeautifulSoup(browser.page_source, "html.parser")
@@ -96,23 +88,23 @@ for i in range(1):
         elif minimum != None:
             maxplayers.append(int(minimum.text))
         else:
-            mayplayers.append(None)
+            maxplayers.append(None)
 
         # min & max dolzina igranja, if zanka za primer ko se igra tocno dolocen cas
         minimum = primary[1].find('span', {'ng-if': 'min > 0'})
         if minimum != None:
             mintime.append(int(minimum.text))
         else:
-            minimum = []
+            minimum = [] ## ne vem a je to potrebno al ne
             mintime.append(None) # če ni podatka o trajanju igre
 
         maksimum = primary[1].find('span', {'ng-if': 'max>0 && min != max'})
         if maksimum != None:
             maxtime.append(int(re.search(r'\d+', maksimum.text).group()))
-        elif minimum != None:
+        elif maksimum != None:
             maxtime.append(int(minimum.text))
         else:
-            mintime.append(None) ## gloomheaven: solo scenario ma tle probleme - čeprau prje je delalo
+            maxtime.append(None) ## gloomheaven: solo scenario ma tle probleme - čeprau prej je delalo
         
         ## starost, if zanka za primer ko starost ni podana
         if re.search(r'\d+', primary[2].text) != None:
@@ -148,36 +140,44 @@ for i in range(1):
         publisher.append(pub[0].text)
 
 
-
-## To show proper characters in excel you have to open new excel file and import data from games.csv using utf-8 encoding.
 n = len(titles)
+## To show proper characters in excel you have to open new excel file and import data from games.csv using utf-8 encoding.
 with open('pythonpodatki/igre.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
-    wr.writerow(["Igra", "Min. st. igralcev", "Max. st. igralcev", "Min cas", "Max. cas", "Leto izdaje", "Min. starost"])
+    wr.writerow(["Igra", "Min. st. igralcev", "Max. st. igralcev", "Min cas", "Max. cas", "Leto izdaje", "Min. starost", "Osnova/Dodatek"])
     for i in range(len(titles)):
-        wr.writerow([titles[i], minplayers[i], maxplayers[i], mintime[i], maxtime[i], release[i], age[i]])
-    for i in range(len(dodatki_ime)):
-        wr.writerow([dodatki_ime[i], minplayers[n+i], maxplayers[n+i], mintime[n+i], maxtime[n+i], release[n+i], age[n+i]])
+        wr.writerow([titles[i], minplayers[i], maxplayers[i], mintime[i], maxtime[i], release[i], age[i], "O"])
+    i = n
+    for dodatki in dodatki_ime:
+        for dodatek in dodatki:
+            wr.writerow([dodatek, minplayers[i], maxplayers[i], mintime[i], maxtime[i], release[i], age[i], "D"])
+            i += 1
 
 with open('pythonpodatki/ustvarjalci.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
     wr.writerow(["Game", "Designers", "Artists", "Publisher"])
     for i in range(len(titles)):
         wr.writerow([titles[i], designers[i], artists[i], publisher[i]])
-    for i in range(len(dodatki_ime)):
-        wr.writerow([dodatki_ime[i], designers[n+i], artists[n+i], publisher[n+i]])
+    i = n
+    for dodatki in dodatki_ime:
+        for dodatek in dodatki:
+            wr.writerow([dodatek, designers[i], artists[i], publisher[i]])
+            i += 1
 
 with open('pythonpodatki/zvrst.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
     wr.writerow(["Game", "Zvrst"])
     for i in range(len(titles)):
        wr.writerow([titles[i], genre[i]])
-    for i in range(len(dodatki_ime)):
-       wr.writerow([dodatki_ime[i], genre[n+i]])
+    i = n
+    for dodatki in dodatki_ime:
+        for dodatek in dodatki:
+            wr.writerow([dodatek, genre[i]])
+            i += 1
 
 with open('pythonpodatki/dodatki.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
-    wr.writerow(["Game", "Dodatek"])
+    wr.writerow(["Igra", "Dodatki"])
     for i in range(len(titles)):
        wr.writerow([titles[i], dodatki_ime[i]])
 
