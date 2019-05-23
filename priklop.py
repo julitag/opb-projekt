@@ -71,13 +71,17 @@ def main():
         SELECT * FROM igra;
     """)
     igre = c.fetchall()
-
     # Vrnemo predlogo za glavno stran
     return bottle.template("index.html", uporabnik=username, igre=igre)
 
+@bottle.route("/gost/")
+def main_gost():
+    username = 'gost'
+    bottle.response.set_cookie('username', username, path='/', secret=secret)
+    bottle.redirect("/")
 
 @bottle.get('/login/')
-def login_get():
+def login_get(tip=None):
     """Serviraj formo za login."""
     return bottle.template('login.html', napaka=None, username=None)  # na zacetku ni usernamea in napake
 
@@ -89,6 +93,7 @@ def login_post():
     username = bottle.request.forms.user
     # Izračunamo MD5 hash geslo, ki ga bomo spravili
     password = password_md5(bottle.request.forms.psw)
+
     # Preverimo, ali se je uporabnik pravilno prijavil
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     c.execute("SELECT 1 FROM uporabnik WHERE username=%s AND geslo=%s",
@@ -100,8 +105,7 @@ def login_post():
                                username=username)  # ohranimo isto uporabnisko ime
     else:
         # Vse je v redu, nastavimo cookie in preusmerimo na glavno stran
-        bottle.response.set_cookie(
-            'username', username, path='/', secret=secret)
+        bottle.response.set_cookie('username', username, path='/', secret=secret)
         bottle.redirect("/")
 
 
@@ -148,7 +152,7 @@ def register_post():
         # Vse je v redu, vstavi novega uporabnika v bazo
         password = password_md5(password1)
         c.execute("INSERT INTO uporabnik (tip, username, mail, geslo) VALUES (%s, %s, %s, %s)",
-                  ('uporabnik', username, mail, password))
+                  ('registriranec', username, mail, password))
         conn.commit()
         # Daj uporabniku cookie
         bottle.response.set_cookie(
