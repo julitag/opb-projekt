@@ -25,7 +25,7 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) ## na kurzorju izve
 def ustvari_igra():
     cur.execute("""
         CREATE TABLE igra (
-            id SERIAL PRIMARY KEY,
+            serijska SERIAL PRIMARY KEY,
             ime TEXT NOT NULL,
             min_igralcev INT,
             max_igralcev INT,
@@ -55,7 +55,7 @@ def uvozi_igra():
                 INSERT INTO igra
                 (ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
-                RETURNING id
+                RETURNING serijska
             """, line)
             ## fetchone() dobi naslednji rezultat poizvedbe, prva vrednost je ID
             lineid, = cur.fetchone()
@@ -65,7 +65,7 @@ def uvozi_igra():
 def ustvari_uporabnik():
     cur.execute("""
         CREATE TABLE uporabnik (
-            id SERIAL PRIMARY KEY,
+            uporabnik_id SERIAL PRIMARY KEY,
             tip TEXT NOT NULL CHECK (tip in ('gost', 'registriranec', 'moderator')),
             username TEXT NOT NULL,
             mail TEXT NOT NULL,
@@ -86,7 +86,7 @@ def pobrisi_uporabnik():
 def ustvari_zanr():
     cur.execute("""
         CREATE TABLE zanr (
-            id SERIAL PRIMARY KEY,
+            zanr_id SERIAL PRIMARY KEY,
             ime TEXT NOT NULL
         );
     """)

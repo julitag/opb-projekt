@@ -8,8 +8,12 @@ import os
 
 browser = webdriver.Chrome("pythonpodatki/chromedriver.exe")
 
-## naslovi iger
-titles = []
+## koncnice in imena
+games = []
+url = []
+games_exp = []
+url_exp= []
+
 ## atributi iger
 mintime = []
 maxtime = []
@@ -17,18 +21,30 @@ minplayers = []
 maxplayers = []
 release = []
 age = []
-genre = []
-## ustvarjalci
-artists = []
-designers = []
-publisher = []
 
-## dodatki
-dodatki_ime = []
-dodatki_url = []
+## atributi dodatkov
+mintime_exp = []
+maxtime_exp = []
+minplayers_exp = []
+maxplayers_exp = []
+release_exp = []
+age_exp = []
+basic = []
+
+## ustvarjalci
+artists = set()
+designers = set()
+publisher = set()
+artist_game = []
+designer_game = []
+publisher_game = []
+
+## zvrst
+genre = set()
+genre_game = []
 
 ## range(n) za top n * 100 iger
-for i in range(1):
+for i in range(5):
     req = requests.get("https://boardgamegeek.com/browse/boardgame/page/%s" % str(i+1))
     soup = bs4.BeautifulSoup(req.text, "html.parser")
 
@@ -37,7 +53,7 @@ for i in range(1):
     for i in collection:
         title = []
         title.extend(i.stripped_strings)
-        titles.append(title[0])
+        games.append(title[0])
         release.append(int(re.search(r'\d+', title[1]).group()))
 
     ## podtabele, zacetna in nato po ena za vsako izmed 100 iger
@@ -45,139 +61,232 @@ for i in range(1):
     rows = table.find_all(lambda tag: tag.name == "tr")
 
     ## seznam web page koncnic iger
-    games = []
     for row in rows[1::]:
         a = row.find("a", href = True)
-        games.append(a["href"])
+        url.append(a["href"])
 
-    # končnice, imena in letnice dodatkov iger
-    for game in games:
-        browser.get("https://boardgamegeek.com" + game + "/expansions")
-        s = bs4.BeautifulSoup(browser.page_source, "html.parser")
-        collection = s.find_all("div", class_ = "summary-item-title summary-item-title-separated")
-        
-        expan_ime = []
-        for i in collection:
-            ime = []
-            ime.extend(i.stripped_strings)
-            expan_ime.append(ime[0])
-            release.append(int(re.search(r'\d+', ime[1]).group()))
+# končnice, imena in letnice dodatkov iger
+j = -1
+for game in url[:100]:
+    j = j + 1
+    browser.get("https://boardgamegeek.com" + game + "/expansions")
+    s = bs4.BeautifulSoup(browser.page_source, "html.parser")
 
-        dodatki_ime.append(expan_ime)
-        ## seznam web page koncnic dodatkov
-        for row in collection:
-            a = row.find("a", href = True)
-            dodatki_url.append(a["href"])
+    collection = s.find_all("div", class_ = "summary-item-title summary-item-title-separated")
+    for i in collection:
+        title = []
+        title.extend(i.stripped_strings)
+        games_exp.append(title[0])
+        release_exp.append(int(re.search(r'\d+', title[1]).group()))
+        basic.append([title[0], games[j]])
 
-    for game in games+dodatki_url:
-        ## web page trenutne igre, ki se ga ustvari na webdriverju
-        browser.get("https://boardgamegeek.com" + game)
-        s = bs4.BeautifulSoup(browser.page_source, "html.parser")
-        primary = s.find_all("div", class_ = "gameplay-item-primary")
+    ## seznam web page koncnic dodatkov
+    for row in collection:
+        a = row.find("a", href = True)
+        url_exp.append(a["href"])
 
-        # min & max stevilo igralcev, if zanka za primer ko imamo tocno doloceno stevilo igralcev
-        minimum = primary[0].find('span', {'ng-if': 'min > 0'})
-        if minimum != None:
-            minplayers.append(int(minimum.text))
-        else:
-            minplayers.append(None)
+##################################################
 
-        maksimum = primary[0].find('span', {'ng-if': 'max>0 && min != max'})
-        if maksimum != None:
-            maxplayers.append(int(re.search(r'\d+', maksimum.text).group()))
-        elif minimum != None:
-            maxplayers.append(int(minimum.text))
-        else:
-            maxplayers.append(None)
+j = -1
+for game in url:
+    j = j + 1
+    ## web page trenutne igre, ki se ga ustvari na webdriverju
+    browser.get("https://boardgamegeek.com" + game)
+    s = bs4.BeautifulSoup(browser.page_source, "html.parser")
+    primary = s.find_all("div", class_ = "gameplay-item-primary")
 
-        # min & max dolzina igranja, if zanka za primer ko se igra tocno dolocen cas
-        minimum = primary[1].find('span', {'ng-if': 'min > 0'})
-        if minimum != None:
-            mintime.append(int(minimum.text))
-        else:
-            minimum = [] ## ne vem a je to potrebno al ne
-            mintime.append(None) # če ni podatka o trajanju igre
+    # min & max stevilo igralcev, if zanka za primer ko imamo tocno doloceno stevilo igralcev
+    minimum = primary[0].find('span', {'ng-if': 'min > 0'})
+    if minimum != None:
+        minplayers.append(int(minimum.text))
+    else:
+        minplayers.append(None)
 
-        maksimum = primary[1].find('span', {'ng-if': 'max>0 && min != max'})
-        if maksimum != None:
-            maxtime.append(int(re.search(r'\d+', maksimum.text).group()))
-        elif maksimum != None:
-            maxtime.append(int(minimum.text))
-        else:
-            maxtime.append(None) ## gloomheaven: solo scenario ma tle probleme - čeprau prej je delalo
-        
-        ## starost, if zanka za primer ko starost ni podana
-        if re.search(r'\d+', primary[2].text) != None:
-            age.append(int(re.search(r'\d+', primary[2].text).group()))
-        else:
-            age.append(None)
+    maksimum = primary[0].find('span', {'ng-if': 'max>0 && min != max'})
+    if maksimum != None:
+        maxplayers.append(int(re.search(r'\d+', maksimum.text).group()))
+    elif minimum != None:
+        maxplayers.append(int(minimum.text))
+    else:
+        maxplayers.append(None)
 
-        primary = s.find_all(class_="feature-description")
-        ## žanr
-        g = primary[1].find_all("a", href=re.compile("category"))
-        names = []
-        for name in g:
-            names.append(name["title"])
-        genre.append(names)
+    # min & max dolzina igranja, if zanka za primer ko se igra tocno dolocen cas
+    minimum = primary[1].find('span', {'ng-if': 'min > 0'})
+    if minimum != None:
+        mintime.append(int(minimum.text))
+    else:
+        mintime.append(None) # če ni podatka o trajanju igre
 
-        primary = s.find_all(class_="credits")
-        ## designerji
-        des = primary[1].find_all("a", href=re.compile("designer"))
-        names = []
-        for name in des:
-            names.append(name["title"])
-        designers.append(names)
+    maksimum = primary[1].find('span', {'ng-if': 'max>0 && min != max'})
+    if maksimum != None:
+        maxtime.append(int(re.search(r'\d+', maksimum.text).group()))
+    elif maksimum != None:
+        maxtime.append(int(minimum.text))
+    else:
+        maxtime.append(None) ## gloomheaven: solo scenario ma tle probleme - čeprau prej je delalo
+    
+    ## starost, if zanka za primer ko starost ni podana
+    if re.search(r'\d+', primary[2].text) != None:
+        age.append(int(re.search(r'\d+', primary[2].text).group()))
+    else:
+        age.append(None)
 
-        ## artisti
-        art = primary[1].find_all("a", href=re.compile("artist"))
-        names = []
-        for name in art:
-            names.append(name["title"])
-        artists.append(names)
+    primary = s.find_all(class_="feature-description")
+    ## zvrst
+    g = primary[1].find_all("a", href=re.compile("category"))
+    for name in g:
+        genre_game.append([games[j], name["title"]])
+        genre.add(name["title"])
 
-        ## založba
-        pub = primary[1].find_all("a", href=re.compile("publisher"))
-        publisher.append(pub[0].text)
+    primary = s.find_all(class_="credits")
+    ## designerji
+    des = primary[1].find_all("a", href=re.compile("designer"))
+    for name in des:
+        designer_game.append([games[j], name["title"]])
+        designers.add(name["title"])
 
+    ## artisti
+    art = primary[1].find_all("a", href=re.compile("artist"))
+    for name in art:
+        artist_game.append([games[j], name["title"]])
+        artists.add(name["title"])
 
-n = len(titles)
+    ## založba
+    pub = primary[1].find_all("a", href=re.compile("publisher"))
+    publisher_game.append([games[j], pub[0].text])
+    publisher.add(pub[0].text)
+
+#################################################
+
+##  še dodatki
+j = -1
+for game in url_exp:
+    j = j + 1
+    ## web page trenutne igre, ki se ga ustvari na webdriverju
+    browser.get("https://boardgamegeek.com" + game)
+    s = bs4.BeautifulSoup(browser.page_source, "html.parser")
+    primary = s.find_all("div", class_ = "gameplay-item-primary")
+
+    # min & max stevilo igralcev, if zanka za primer ko imamo tocno doloceno stevilo igralcev
+    minimum = primary[0].find('span', {'ng-if': 'min > 0'})
+    if minimum != None:
+        minplayers_exp.append(int(minimum.text))
+    else:
+        minplayers_exp.append(None)
+
+    maksimum = primary[0].find('span', {'ng-if': 'max>0 && min != max'})
+    if maksimum != None:
+        maxplayers_exp.append(int(re.search(r'\d+', maksimum.text).group()))
+    elif minimum != None:
+        maxplayers_exp.append(int(minimum.text))
+    else:
+        maxplayers_exp.append(None)
+
+    # min & max dolzina igranja, if zanka za primer ko se igra tocno dolocen cas
+    minimum = primary[1].find('span', {'ng-if': 'min > 0'})
+    if minimum != None:
+        mintime_exp.append(int(minimum.text))
+    else:
+        mintime_exp.append(None) # če ni podatka o trajanju igre
+
+    maksimum = primary[1].find('span', {'ng-if': 'max>0 && min != max'})
+    if maksimum != None:
+        maxtime_exp.append(int(re.search(r'\d+', maksimum.text).group()))
+    elif maksimum != None:
+        maxtime_exp.append(int(minimum.text))
+    else:
+        maxtime_exp.append(None) ## gloomheaven: solo scenario ma tle probleme - čeprau prej je delalo
+    
+    ## starost, if zanka za primer ko starost ni podana
+    if re.search(r'\d+', primary[2].text) != None:
+        age_exp.append(int(re.search(r'\d+', primary[2].text).group()))
+    else:
+        age_exp.append(None)
+
+    primary = s.find_all(class_="feature-description")
+    ## zvrst
+    g = primary[1].find_all("a", href=re.compile("category"))
+    for name in g:
+        genre_game.append([games_exp[j], name["title"]])
+        genre.add(name["title"])
+
+    primary = s.find_all(class_="credits")
+    ## designerji
+    des = primary[1].find_all("a", href=re.compile("designer"))
+    for name in des:
+        designer_game.append([games_exp[j], name["title"]])
+        designers.add(name["title"])
+
+    ## artisti
+    art = primary[1].find_all("a", href=re.compile("artist"))
+    for name in art:
+        artist_game.append([games_exp[j], name["title"]])
+        artists.add(name["title"])
+
+    ## založba
+    pub = primary[1].find_all("a", href=re.compile("publisher"))
+    publisher_game.append([games_exp[j], pub[0].text])
+    publisher.add(pub[0].text)
+
 ## To show proper characters in excel you have to open new excel file and import data from games.csv using utf-8 encoding.
 with open('pythonpodatki/igre.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
     wr.writerow(["Igra", "Min. st. igralcev", "Max. st. igralcev", "Min cas", "Max. cas", "Leto izdaje", "Min. starost", "Osnova/Dodatek"])
-    for i in range(len(titles)):
-        wr.writerow([titles[i], minplayers[i], maxplayers[i], mintime[i], maxtime[i], release[i], age[i], "O"])
-    i = n
-    for dodatki in dodatki_ime:
-        for dodatek in dodatki:
-            wr.writerow([dodatek, minplayers[i], maxplayers[i], mintime[i], maxtime[i], release[i], age[i], "D"])
-            i += 1
+    for i in range(len(games)):
+        wr.writerow([games[i], minplayers[i], maxplayers[i], mintime[i], maxtime[i], release[i], age[i], '']) 
+    for i in range(len(games_exp)):
+        wr.writerow([games_exp[i], minplayers_exp[i], maxplayers_exp[i], mintime_exp[i], maxtime_exp[i], release_exp[i], age_exp[i], basic[i][1]])
 
-with open('pythonpodatki/ustvarjalci.csv', 'w', newline='', encoding='utf-8') as f:
+with open('pythonpodatki/igradodatek.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
-    wr.writerow(["Game", "Designers", "Artists", "Publisher"])
-    for i in range(len(titles)):
-        wr.writerow([titles[i], designers[i], artists[i], publisher[i]])
-    i = n
-    for dodatki in dodatki_ime:
-        for dodatek in dodatki:
-            wr.writerow([dodatek, designers[i], artists[i], publisher[i]])
-            i += 1
+    wr.writerow(["Dodatek", "Osnova"])
+    for b in basic:
+        wr.writerow([b[0], b[1]]) 
 
-with open('pythonpodatki/zvrst.csv', 'w', newline='', encoding='utf-8') as f:
+with open('pythonpodatki/avtor.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
-    wr.writerow(["Game", "Zvrst"])
-    for i in range(len(titles)):
-       wr.writerow([titles[i], genre[i]])
-    i = n
-    for dodatki in dodatki_ime:
-        for dodatek in dodatki:
-            wr.writerow([dodatek, genre[i]])
-            i += 1
+    wr.writerow(["Avtor"])
+    for artist in artists:
+        wr.writerow([artist])
 
-with open('pythonpodatki/dodatki.csv', 'w', newline='', encoding='utf-8') as f:
+with open('pythonpodatki/oblikovalci.csv', 'w', newline='', encoding='utf-8') as f:
     wr = csv.writer(f)
-    wr.writerow(["Igra", "Dodatki"])
-    for i in range(len(titles)):
-       wr.writerow([titles[i], dodatki_ime[i]])
+    wr.writerow(["Oblikovalec"])
+    for designer in designers:
+        wr.writerow([designer])
 
+with open('pythonpodatki/zalozba.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Zalozba"])
+    for pub in publisher:
+        wr.writerow([pub])
+
+with open('pythonpodatki/igraavtor.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Igra", "Avtor"])
+    for i in artist_game:
+        wr.writerow([i[0], i[1]])
+
+with open('pythonpodatki/igraoblikovalec.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Igra", "Oblikovalec"])
+    for i in designer_game:
+        wr.writerow([i[0], i[1]])
+
+with open('pythonpodatki/igrazalozba.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Igra", "Zalozba"])
+    for i in publisher_game:
+        wr.writerow([i[0], i[1]])
+
+with open('pythonpodatki/zvrsti.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Zvrst"])
+    for g in genre:
+        wr.writerow([g])
+
+with open('pythonpodatki/igrazvrst.csv', 'w', newline='', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    wr.writerow(["Igra", "Zvrst"])
+    for i in genre_game:
+        wr.writerow([i[0], i[1]])
