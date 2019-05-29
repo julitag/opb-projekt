@@ -207,7 +207,14 @@ def igra_get(ime):
             ORDER BY komentarji.cas DESC
         """, [trenutna[1]])
         komentarji = c.fetchall()
-        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji)
+        c.execute("""
+            SELECT zvrst.ime FROM zvrst
+            JOIN igrazvrst ON zvrst.zvrst_id = igrazvrst.zvrst_id
+            JOIN igra ON igrazvrst.serijska = igra.serijska
+            WHERE igra.ime=%s
+        """, [trenutna[1]])
+        zvrsti = c.fetchall()
+        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji, zvrsti=zvrsti)
     else:
         bottle.redirect("/")
 

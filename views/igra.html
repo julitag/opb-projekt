@@ -79,6 +79,17 @@
               </td>
             </tr>
             <tr>
+              <th>Zvrsti</th>
+              <td style="color:rgb(64,64,64)">
+                %for i in range(len(zvrsti)):
+                % if i < len(zvrsti)-1:
+                {{zvrsti[i][0] + ', '}}
+                % else:
+                {{zvrsti[i][0]}}
+                %end
+                %end
+              </td> </tr> 
+            <tr>
               <th>Avtorji</th>
               <td style="color:rgb(64,64,64)">
                 %for i in range(len(avtorji)):
