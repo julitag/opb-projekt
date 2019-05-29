@@ -1,0 +1,58 @@
+%rebase('navigacija.html', naslov='Avtorji')
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Družabne igre</h1>
+  <p class="mb-4">Podatkovna baza družabnih iger in njihovih dodatkov</a>.</p>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Rezultati poizvedbe</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                        <tr>
+                          <th>Ime</th>
+                          <th>Ime1</th>
+                          <th>Ime</th>
+                          <th>Ime</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                            <tr>
+                              <th>Ime</th>
+                              <th>Ime</th>
+                              <th>Ime</th>
+                              <th>Ime</th>
+                            </tr>
+                          </tfoot>
+                      <tbody>
+                        % for i in range(0, len(avtorji), 4):
+                          % avtor = avtorji[i:i+4] + [[''], [''], [''], ['']]
+                          <tr>
+                            <td>
+                                <a href="/avtor/{{avtor[0][0]}}">{{avtor[0][0]}}</a>
+                            </td>
+                            <td>
+                                <a href="/avtor/{{avtor[0][0]}}">{{avtor[1][0]}}</a>
+                            </td>
+                            <td>
+                                <a href="/avtor/{{avtor[0][0]}}">{{avtor[2][0]}}</a>
+                            </td>
+                            <td>
+                                <a href="/avtor/{{avtor[0][0]}}">{{avtor[3][0]}}</a>
+                            </td>
+                          </tr>
+                        %end
+                        
+                      </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

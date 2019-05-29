@@ -1,17 +1,199 @@
-%rebase('navigacija.html', naslov='Igra')
+%rebase('navigacija.html', naslov='Seznam iger')
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
 
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  .textarea {
+
+  width: 100%;
+  }
+</style>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">{{igra}}</h1>
+  <p class="mb-4">Informacije o igri</a>.</p>
+  <div class=row> 
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Osnovni podatki o igri</h6>
+        </div>
+        <div class="card-body">
+          <table>
+            <col width="40">
+            <col width="300">
+            <tr>
+              <th>Ime</th>
+              <td style="color:rgb(64,64,64)">{{info[1]}}</td>
+            </tr>
+            <tr>
+              <th>Število igralcev</th>
+              <td style="color:rgb(64,64,64)">
+                %if info[2] == None:
+                {{'/'}}
+                %elif info[3] == None:
+                {{str(info[2])}}
+                %elif info[3] == info[2]:
+                {{str(info[2])}}
+                %else:
+                {{str(info[2]) + ' - ' + str(info[3])}}
+                %end
+              </td>
+            </tr>
+            <tr>
+              <th>Čas igranja</th>
+              <td style="color:rgb(64,64,64)"> 
+                %if info[4] == None:
+                {{'/'}}
+                %elif info[5] == None:
+                {{str(info[4]) + ' min'}}
+                %else:
+                {{str(info[4]) + ' - ' + str(info[5]) + ' min'}}
+                %end
+              </td>
+            </tr>
+            <tr>
+              <th>Leto izdaje</th>
+              <td style="color:rgb(64,64,64)">{{info[6]}}</td>
+            </tr>
+            <tr>
+              <th>Min. starost</th>
+              <td style="color:rgb(64,64,64)">
+                %if info[7] == None:
+                {{'/'}}
+                %else:
+                {{str(info[7]) + '+'}}
+                %end
+              </td>
+            </tr>
+            <tr>
+              <th>Avtorji</th>
+              <td style="color:rgb(64,64,64)">
+                %for i in range(len(avtorji)):
+                % if i < len(avtorji)-1:
+                {{avtorji[i][0] + ', '}}
+                % else:
+                {{avtorji[i][0]}}
+                %end
+                %end
+              </td> </tr> <tr>
+              <th>Oblikovalci</th>
+              <td style="color:rgb(64,64,64)">
+                %for i in range(len(oblikovalci)):
+                % if i < len(oblikovalci)-1:
+                {{oblikovalci[i][0] + ', '}}
+                % else:
+                {{oblikovalci[i][0]}}
+                %end
+                %end
+              </td>
+                  </tr> <tr>
+              <th>Založba</th>
+              <td style="color:rgb(64,64,64)">{{zalozba[0][0]}}</td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Ocena igre</h6>
+          </div>
+          <div class="card-body">
           </div>
         </div>
-      </footer>
-      <!-- End of Footer -->
-
+      % if uporabnik != 'gost': 
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Dodaj svoj komentar</h6>
+          </div>
+          <div class="card-body">
+              
+            <form class="user" role="form" method="post" action="/komentar/{{igra}}">
+              <div>
+                  <textarea class="textarea" placeholder="Tvoj komentar" name="msg" required></textarea>
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-success btn-icon-split btn-lg" type="submit" style="width: 345px;">Oddaj komentar</button>
+                  </div>
+          </div>
+      %else:
+      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Komentiraj</h6>
+            </div>
+            <div class="card-body" style="color:rgb(64,64,64)">
+            Da podaš svoj komentar se moraš prijaviti. To narediš tako, da klikneš levo zgoraj na gumb prijava.
+          </div>
+        %end
     </div>
-    <!-- End of Content Wrapper -->
+    </div>
+    
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            %if info[8] != None:
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Osnovna igra</h6>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-light btn-icon-split" href="/igra/{{osnova[0]}}">
+                  <span class="icon text-gray-600">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                  <span class="text">{{osnova[0]}}</span>
+                </a>
+            </div>
+            %else:
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Dodatki</h6>
+            </div>
+            <div class="card-body">
+              %for dodatek in dodatki:
+              <div ><a class="btn btn-light btn-icon-split" href="/igra/{{dodatek[0]}}">
+                  <span class="icon text-gray-600">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
+                  <span class="text">{{dodatek[0]}}</span>
+                </a>
+              </div>
+              %end
+            </div>
+            %end
+          </div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Komentarji</h6>
+            </div>
+            <div class="card-body" style="color:rgb(64,64,64)">
+              %if len(komentarji) != 0:
+              % for komentar in komentarji:
+              % komentar[3] = komentar[3].strftime("%D, %H:%M")
+              <div class="card mb-4">
+                  <div class="card-header">
+                    {{komentar[3] + " je uporabnik " + komentar[0] + " komentiral:"}}
+                  </div>
+                  <div class="card-body">
+                    {{komentar[2]}}
+                  </div>
+                </div>
+                %end
+
+              %else:
+                    Ta igra še nima komentarja. Bodi prvi in komentiraj!
+              %end   
+            </div>
+            </div>
+          </div>
+    </div>
+</div>

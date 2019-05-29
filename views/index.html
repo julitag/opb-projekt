@@ -3,8 +3,8 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-  <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+  <h1 class="h3 mb-2 text-gray-800">Družabne igre</h1>
+  <p class="mb-4">Podatkovna baza družabnih iger in njihovih dodatkov</a>.</p>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
@@ -41,9 +41,31 @@
                     <td>
                         <a href="/igra/{{igra[1]}}">{{igra[1]}}</a>
                     </td>
-                    <td>{{str(igra[2]) + ' - ' + str(igra[3])}}</td>
-                    <td>{{str(igra[4]) + ' - ' + str(igra[5]) + " min"}}</td>
-                    <td>{{str(igra[7]) + " let"}}</td>
+                    <td>
+                        %if igra[2] == None:
+                        {{""}}
+                        %elif igra[3] == igra[2]:
+                        {{str(igra[2])}}
+                        %else:
+                        {{str(igra[2]) + ' - ' + str(igra[3])}}
+                        %end
+                      </td>
+                    </td>
+                    <td>
+                      %if igra[4] == None:
+                      {{""}}
+                      %elif igra[5] == None:
+                      {{str(igra[4]) + " min"}}
+                      %else:
+                      {{str(igra[4]) + ' - ' + str(igra[5]) + " min"}}
+                      %end
+                    </td>
+                    <td>
+                      %if igra[7] == None:
+                      {{""}}
+                      %else:
+                      {{str(igra[7]) + " let"}}</td>
+                      %end
                     <td>{{igra[6]}}</td>
                   </tr>
                   %end 

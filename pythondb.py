@@ -282,7 +282,23 @@ def ustvari_uporabnik():
     """)
     conn.commit()
 
-
+def ustvari_komentarji():
+    cur.execute("""
+        CREATE TABLE komentarji (
+            stevilka SERIAL PRIMARY KEY,
+            uporabnik_id INT NOT NULL REFERENCES uporabnik(uporabnik_id),
+            serijska INT NOT NULL REFERENCES igra(serijska),
+            komentar VARCHAR(1000) NOT NULL,
+            cas TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cur.execute("""
+        ALTER TABLE komentarji
+        ADD CONSTRAINT uporabnik_id CHECK (uporabnik_id != 10001)
+    """)
+    cur.execute("""
+        SELECT SETVAL(pg_get_serial_sequence('komentarji', 'stevilka'), 10000)
+    """)
 
 
 ###################################

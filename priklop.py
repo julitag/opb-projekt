@@ -85,7 +85,6 @@ def login_get(tip=None):
     """Serviraj formo za login."""
     return bottle.template('login.html', napaka=None, username=None)  # na zacetku ni usernamea in napake
 
-
 @bottle.post("/login/")
 def login_post():
     """Obdelaj izpolnjeno formo za prijavo"""
@@ -163,8 +162,100 @@ def register_post():
 @bottle.get("/igra/<ime>")
 def igra_get(ime):
     (tip, username, mail) = get_user()
-    return bottle.template("igra.html", uporabnik=username, igra=ime)
+    c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c.execute("SELECT * FROM igra WHERE ime=%s", [ime])
+    trenutna = c.fetchone()
+    if trenutna:
+        c.execute("""
+            SELECT DISTINCT ustvarjalci.ime FROM ustvarjalci
+            JOIN igraust ON ustvarjalci.u_id = igraust.u_id
+            JOIN igra ON igraust.serijska = igra.serijska
+            WHERE ustvarjalci.tip='avtor' AND igra.ime=%s
+            """, [trenutna[1]])
+        avtorji = c.fetchall()
+        c.execute("""
+            SELECT DISTINCT ustvarjalci.ime FROM ustvarjalci
+            JOIN igraust ON ustvarjalci.u_id = igraust.u_id
+            JOIN igra ON igraust.serijska = igra.serijska
+            WHERE ustvarjalci.tip='oblikovalec' AND igra.ime=%s
+            """, [trenutna[1]])
+        oblikovalci = c.fetchall()
+        c.execute("""
+            SELECT zalozba.ime FROM zalozba
+            JOIN igrazal ON zalozba.zalozba_id = igrazal.zalozba_id
+            JOIN igra ON igrazal.serijska = igra.serijska
+            WHERE igra.ime=%s
+            """, [trenutna[1]])
+        zalozba = c.fetchall()
+        c.execute("""
+            SELECT dodatek.ime FROM igra AS dodatek
+            JOIN igra AS osnova ON dodatek.dodatek=osnova.serijska
+            WHERE osnova.ime=%s
+            """, [trenutna[1]])
+        dodatki = c.fetchall()
+        c.execute("""
+            SELECT osnova.ime FROM igra AS osnova
+            JOIN igra AS dodatek ON dodatek.dodatek=osnova.serijska
+            WHERE dodatek.ime=%s
+            """, [trenutna[1]])
+        osnova = c.fetchone()
+        c.execute("""
+            SELECT uporabnik.username, igra.ime, komentarji.komentar, komentarji.cas FROM komentarji
+            JOIN uporabnik ON komentarji.uporabnik_id = uporabnik.uporabnik_id
+            JOIN igra ON komentarji.serijska = igra.serijska
+            WHERE igra.ime=%s
+            ORDER BY komentarji.cas DESC
+        """, [trenutna[1]])
+        komentarji = c.fetchall()
+        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji)
+    else:
+        bottle.redirect("/")
 
+@bottle.route("/brskalnik/avtor/")
+def avtor():
+    """Glavna stran."""
+    # Iz cookieja dobimo uporabnika (ali ga preusmerimo na login, če nima cookija)
+    (tip, username, mail) = get_user()
+
+    c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c.execute("""
+        SELECT ime FROM ustvarjalci WHERE tip='avtor' ORDER BY ime ASC;
+    """)
+    avtorji = c.fetchall()
+    # Vrnemo predlogo za glavno stran
+    return bottle.template("avtorji.html", uporabnik=username, avtorji=avtorji)
+
+@bottle.get("/avtor/<ime>")
+def avtor_get(ime):
+    (tip, username, mail) = get_user()
+    c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c.execute("SELECT ime FROM ustvarjalci WHERE ime=%s", [ime])
+    trenutna = c.fetchone()
+    if trenutna:
+        c.execute("""
+            SELECT igra.ime FROM igra
+            JOIN igraust ON igra.serijska = igraust.serijska
+            JOIN ustvarjalci ON igraust.u_id = ustvarjalci.u_id
+            WHERE ustvarjalci.ime=%s AND tip='avtor'
+         """, [ime])
+        igre = c.fetchall()
+        return bottle.template("avtor.html", uporabnik=username, avtor=ime, igre=igre)
+    else:
+        bottle.redirect("/brskalnik/avtor/")
+
+@bottle.post("/komentar/<igra>")
+def igra_post(igra):
+    (tip, username, mail) = get_user()
+    komentar = bottle.request.forms.msg
+    c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    c.execute("""
+        INSERT INTO komentarji(uporabnik_id, serijska, komentar) VALUES (
+            (SELECT uporabnik_id FROM uporabnik WHERE username=%s),
+            (SELECT serijska FROM igra WHERE ime=%s),
+            %s
+        )
+    """, [username, igra, komentar])
+    bottle.redirect("/igra/%s" % igra)
 
 @bottle.get("/brskalnik/")
 def brskalnik_get():

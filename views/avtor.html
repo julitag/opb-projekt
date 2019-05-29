@@ -1,0 +1,47 @@
+%rebase('navigacija.html', naslov='Avtor')
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .textarea {
+
+        width: 100%;
+    }
+</style>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">{{avtor}}</h1>
+    <p class="mb-4">Informacije o avtorju</a>.</p>
+    <div class=row>
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Igre avtorja</h6>
+                </div>
+                %for igra in igre:
+                <div ><a class="btn btn-light btn-icon-split" href="/igra/{{igra[0]}}">
+                    <span class="icon text-gray-600">
+                      <i class="fas fa-arrow-right"></i>
+                    </span>
+                    <span class="text">{{igra[0]}}</span>
+                  </a>
+                </div>
+                %end
+            </div>
+        </div>
+    </div>
+</div>
+</div>
