@@ -214,7 +214,12 @@ def igra_get(ime):
             WHERE igra.ime=%s
         """, [trenutna[1]])
         zvrsti = c.fetchall()
-        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji, zvrsti=zvrsti)
+        c.execute("""
+            SELECT ocena FROM igra
+            WHERE ime=%s
+            """, [trenutna[1]])
+        ocena = c.fetchall()
+        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji, zvrsti=zvrsti, ocena = ocena)
     else:
         bottle.redirect("/")
 
