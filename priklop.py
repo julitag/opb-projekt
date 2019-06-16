@@ -215,11 +215,18 @@ def igra_get(ime):
         """, [trenutna[1]])
         zvrsti = c.fetchall()
         c.execute("""
-            SELECT ROUND(AVG(ocena),2) FROM ocene
+            SELECT ROUND(AVG(ocena),2), COUNT(*) FROM ocene
             WHERE serijska = (SELECT serijska FROM igra WHERE ime = %s)
         """,[trenutna[1]])
         ocena = c.fetchone()
-        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji, zvrsti=zvrsti, ocena = ocena)
+        print(ocena,ocena[0])
+        c.execute("""
+            SELECT ocena FROM ocene
+            WHERE serijska = (SELECT serijska FROM igra WHERE ime = %s) AND
+                uporabnik_id = (SELECT uporabnik_id FROM uporabnik WHERE username = %s)
+        """,[trenutna[1], username])
+        ocenaUporabnika = c.fetchone()
+        return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji, zvrsti=zvrsti, ocena = ocena, upOcena = ocenaUporabnika)
     else:
         bottle.redirect("/")
 

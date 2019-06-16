@@ -122,9 +122,13 @@
             <h6 class="m-0 font-weight-bold text-primary">Ocena igre</h6>
           </div>
           <div class="card-body">
-            %if ocena[0] != None:
-            {{ocena[0]}}
-            %end
+              %if ocena[0] != None and upOcena[0] != None:
+              To igro je oceni {{ocena[1]}} ljudi, skupna ocena je {{ocena[0]}} od 10. Vaša trenutna ocena je {{upOcena[0]}}. Če jo želite spremeniti, izberite oceno in pritisnite na gumb Oceni igro.
+              %elif ocena[0] != None:
+              To igro je oceni {{ocena[1]}} ljudi, skupna ocena je {{ocena[0]}} od 10. Igre še niste ocenili. Če jo želite, izberite oceno pritisnite na gumb Oceni igro.
+              %else:
+              Ta igra še nima ocene. Bodi prvi in jo oceni!
+              %end
           </div>
           % if uporabnik != 'gost':
           <div class="card-body">
