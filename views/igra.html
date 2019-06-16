@@ -121,28 +121,76 @@
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Ocena igre</h6>
           </div>
+          % if uporabnik == 'gost':
+          
           <div class="card-body">
-              %if ocena[0] != None and upOcena[0] != None:
-              To igro je oceni {{ocena[1]}} ljudi, skupna ocena je {{ocena[0]}} od 10. Vaša trenutna ocena je {{upOcena[0]}}. Če jo želite spremeniti, izberite oceno in pritisnite na gumb Oceni igro.
-              %elif ocena[0] != None:
-              To igro je oceni {{ocena[1]}} ljudi, skupna ocena je {{ocena[0]}} od 10. Igre še niste ocenili. Če jo želite, izberite oceno pritisnite na gumb Oceni igro.
+              %if ocena:
+              Ocena: <span style="color:rgb(64,64,64)"> {{ocena[0]}}/10 </span> </br>
+              Število podanih ocen: <span style="color:rgb(64,64,64)">{{ocena[1]}} </span> </br>
+              %else:
+              Ta igra še nima ocene. Bodi prvi in jo oceni! </br>
+              %end
+              Da podaš oceno se moraš prijaviti. To narediš tako, da klikneš levo zgoraj na gumb prijava.
+
+          % else:
+          <div class="card-body">
+              %if ocena and upOcena:
+              Ocena: <span style="color:rgb(64,64,64)"> {{ocena[0]}}/10 </span> </br>
+              Število podanih ocen: <span style="color:rgb(64,64,64)">{{ocena[1]}} </span> </br>
+              Vaša trenutna ocena: <span style="color:rgb(64,64,64)">{{upOcena[0]}}</span> </br>
+              Če trenutno oceno želite spremeniti, izberite novo vrednost in pritisnite na gumb Oceni igro.
+              %elif ocena:
+              Ocena: {{ocena[0]}}/10 </br>
+              Število podanih ocen: {{ocena[1]}} </br>
+              Igre še niste ocenili. Če to želite storiti, izberite oceno in pritisnite na gumb Oceni igro.
               %else:
               Ta igra še nima ocene. Bodi prvi in jo oceni!
               %end
-          </div>
-          % if uporabnik != 'gost':
-          <div class="card-body">
-            <form class="user" role="form" method="post" action="/komentar/{{igra}}">
-              <div class="form-group">
-                <input class="form-control form-control-sm" type="number" name="rating" min="1" max="10" style="width: 100px;">
+            <form class="user" role="form" method="post" action="/komentar/{{igra}}" style="margin-top: 15px">
+              <div>
+              <input class="form-control form-control-sm" type="number" name="rating" min="1" max="10" style="width: 100px;">
+            </div>
+              <div class="form-group" style="margin-top: 5px">
                 <button class="btn btn-success btn-icon-split btn-lg" type="submit" style="width: 200px;">Oceni igro</button>
               </div>
             </form>
+          %end
+          </div>
+          
+      </div>
+      <div class="card shadow mb-4">
+          %if info[8] != None:
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Osnovna igra</h6>
+          </div>
+          <div class="card-body">
+              <a class="btn btn-light btn-icon-split" href="/igra/{{osnova[0]}}">
+                <span class="icon text-gray-600">
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="text">{{osnova[0]}}</span>
+              </a>
+          </div>
+          %else:
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Dodatki</h6>
+          </div>
+          <div class="card-body">
+            %for dodatek in dodatki:
+            <div ><a class="btn btn-light btn-icon-split" href="/igra/{{dodatek[0]}}">
+                <span class="icon text-gray-600">
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="text">{{dodatek[0]}}</span>
+              </a>
+            </div>
+            %end
           </div>
           %end
+        </div>
       </div>
-      
-      </div>
+
+      <div class="col-lg-6 mb-4">
       % if uporabnik != 'gost': 
       <div class="card shadow mb-4">
           <div class="card-header py-3">
@@ -157,7 +205,7 @@
                       <button class="btn btn-success btn-icon-split btn-lg" type="submit" style="width: 345px;">Oddaj komentar</button>
                   </div>
               </form>
-          </div>
+              </div>
       %else:
       <div class="card shadow mb-4">
           <div class="card-header py-3">
@@ -168,62 +216,33 @@
           </div>
         %end
     </div>
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Komentarji</h6>
+      </div>
+      <div class="card-body" style="color:rgb(64,64,64)">
+        %if len(komentarji) != 0:
+        % for komentar in komentarji:
+        % komentar[3] = komentar[3].strftime("%D, %H:%M")
+        <div class="card mb-4">
+            <div class="card-header">
+              {{komentar[3] + " je uporabnik " + komentar[0] + " komentiral:"}}
+            </div>
+            <div class="card-body">
+              {{komentar[2]}}
+            </div>
+          </div>
+          %end
+
+        %else:
+              Ta igra še nima komentarja. Bodi prvi in komentiraj!
+        %end   
+      </div>
+      </div>
     </div>
+  </div>
     
     <div class="col-lg-6 mb-4">
-        <div class="card shadow mb-4">
-            %if info[8] != None:
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Osnovna igra</h6>
-            </div>
-            <div class="card-body">
-                <a class="btn btn-light btn-icon-split" href="/igra/{{osnova[0]}}">
-                  <span class="icon text-gray-600">
-                    <i class="fas fa-arrow-right"></i>
-                  </span>
-                  <span class="text">{{osnova[0]}}</span>
-                </a>
-            </div>
-            %else:
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Dodatki</h6>
-            </div>
-            <div class="card-body">
-              %for dodatek in dodatki:
-              <div ><a class="btn btn-light btn-icon-split" href="/igra/{{dodatek[0]}}">
-                  <span class="icon text-gray-600">
-                    <i class="fas fa-arrow-right"></i>
-                  </span>
-                  <span class="text">{{dodatek[0]}}</span>
-                </a>
-              </div>
-              %end
-            </div>
-            %end
-          </div>
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Komentarji</h6>
-            </div>
-            <div class="card-body" style="color:rgb(64,64,64)">
-              %if len(komentarji) != 0:
-              % for komentar in komentarji:
-              % komentar[3] = komentar[3].strftime("%D, %H:%M")
-              <div class="card mb-4">
-                  <div class="card-header">
-                    {{komentar[3] + " je uporabnik " + komentar[0] + " komentiral:"}}
-                  </div>
-                  <div class="card-body">
-                    {{komentar[2]}}
-                  </div>
-                </div>
-                %end
-
-              %else:
-                    Ta igra še nima komentarja. Bodi prvi in komentiraj!
-              %end   
-            </div>
-            </div>
-          </div>
+        
     </div>
 </div>

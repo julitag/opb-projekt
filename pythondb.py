@@ -48,12 +48,12 @@ def ustvari_igra():
         ALTER TABLE igra
         ADD COLUMN dodatek INT REFERENCES igra(serijska)
     """)
-    cur.execute("""
-        SELECT SETVAL(pg_get_serial_sequence('igra', 'serijska'), 10000)
-    """)
     conn.commit()
 
 def uvozi_igra():
+    cur.execute("""
+        SELECT SETVAL(pg_get_serial_sequence('igra', 'serijska'), 10000)
+    """)
     with open("tabele/igre.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
@@ -103,12 +103,12 @@ def ustvari_zvrst():
             ime TEXT NOT NULL
         );
     """)
-    cur.execute("""
-        SELECT SETVAL(pg_get_serial_sequence('zvrst', 'zvrst_id'), 1000)
-    """)
     conn.commit()
 
 def uvozi_zvrst():
+    cur.execute("""
+        SELECT SETVAL(pg_get_serial_sequence('zvrst', 'zvrst_id'), 1000)
+    """)
     with open("tabele/zvrsti.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
@@ -152,12 +152,12 @@ def ustvari_ustvarjalci():
             tip TEXT NOT NULL CHECK (tip in ('avtor', 'oblikovalec'))
         );
     """)
-    cur.execute("""
-        SELECT SETVAL(pg_get_serial_sequence('ustvarjalci', 'u_id'), 10000)
-    """)
     conn.commit()
 
 def uvozi_ustvarjalci():
+    cur.execute("""
+        SELECT SETVAL(pg_get_serial_sequence('ustvarjalci', 'u_id'), 10000)
+    """)
     with open("tabele/avtor.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico
@@ -220,12 +220,12 @@ def ustvari_zalozba():
             ime TEXT NOT NULL
         );
     """)
-    cur.execute("""
-        SELECT SETVAL(pg_get_serial_sequence('zalozba', 'zalozba_id'), 10000)
-    """)
     conn.commit()
 
 def uvozi_zalozba():
+    cur.execute("""
+        SELECT SETVAL(pg_get_serial_sequence('zalozba', 'zalozba_id'), 10000)
+    """)
     with open("tabele/zalozba.csv", encoding='utf-8') as f:
         rd = csv.reader(f)
         next(rd) # izpusti naslovno vrstico

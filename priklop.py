@@ -219,7 +219,6 @@ def igra_get(ime):
             WHERE serijska = (SELECT serijska FROM igra WHERE ime = %s)
         """,[trenutna[1]])
         ocena = c.fetchone()
-        print(ocena,ocena[0])
         c.execute("""
             SELECT ocena FROM ocene
             WHERE serijska = (SELECT serijska FROM igra WHERE ime = %s) AND
