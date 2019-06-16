@@ -121,23 +121,38 @@
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Ocena igre</h6>
           </div>
-          <div class="card-body" style="color:rgb(64,64,64)">{{ocena[0][0]}}
+          <div class="card-body">
+            %if ocena[0] != None:
+            {{ocena[0]}}
+            %end
           </div>
-        </div>
+          % if uporabnik != 'gost':
+          <div class="card-body">
+            <form class="user" role="form" method="post" action="/komentar/{{igra}}">
+              <div class="form-group">
+                <input class="form-control form-control-sm" type="number" name="rating" min="1" max="10" style="width: 100px;">
+                <button class="btn btn-success btn-icon-split btn-lg" type="submit" style="width: 200px;">Oceni igro</button>
+              </div>
+            </form>
+          </div>
+          %end
+      </div>
+      
+      </div>
       % if uporabnik != 'gost': 
       <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Dodaj svoj komentar</h6>
           </div>
           <div class="card-body">
-              
             <form class="user" role="form" method="post" action="/komentar/{{igra}}">
               <div>
-                  <textarea class="textarea" placeholder="Tvoj komentar" name="msg" required></textarea>
+                  <textarea class="textarea" placeholder="Tvoj komentar" name="msg" ></textarea>
                   </div>
                   <div class="form-group">
                       <button class="btn btn-success btn-icon-split btn-lg" type="submit" style="width: 345px;">Oddaj komentar</button>
                   </div>
+              </form>
           </div>
       %else:
       <div class="card shadow mb-4">
@@ -145,7 +160,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Komentiraj</h6>
             </div>
             <div class="card-body" style="color:rgb(64,64,64)">
-            Da podaš svoj komentar, se moraš prijaviti. To narediš tako, da klikneš levo zgoraj na gumb prijava.
+            Da podaš svoj komentar se moraš prijaviti. To narediš tako, da klikneš levo zgoraj na gumb prijava.
           </div>
         %end
     </div>

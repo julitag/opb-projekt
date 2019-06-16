@@ -22,6 +22,8 @@ cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) ## na kurzorju izve
 
 ## tabele s pridobljenimi podatki
 
+
+
 def pobrisi(tabela):
     cur.execute(
         psycopg2.sql.SQL("""
@@ -39,8 +41,7 @@ def ustvari_igra():
             min_cas INT,
             max_cas INT,
             leto_izdaje INT,
-            starost INT,
-            ocena FLOAT
+            starost INT
         );
     """)
     cur.execute("""
@@ -71,12 +72,12 @@ def uvozi_igra():
             if line[6] == '':
                 line[6] = None
             # osnovna igra
-            if line[8] == '':
-                line[8] = None 
+            if line[7] == '':
+                line[7] = None
                 cur.execute("""
                     INSERT INTO igra
-                    (ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost, ocena, dodatek)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    (ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost, dodatek)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                     RETURNING serijska
                 """, line)
                 ## fetchone() dobi naslednji rezultat poizvedbe, prva vrednost je ID
@@ -85,7 +86,7 @@ def uvozi_igra():
             else:
                 cur.execute("""
                     INSERT INTO igra
-                    (ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost, ocena, dodatek)
+                    (ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost, dodatek)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, 
                     (SELECT serijska FROM igra WHERE ime=%s))
                     RETURNING serijska
@@ -260,6 +261,7 @@ def uvozi_igrazal():
                 print("Igra %s je že vnesena" % line[0])
     conn.commit()
 
+
 ###############################
 
 ## tabele uporabnikov, sporocil in ocen
@@ -298,6 +300,22 @@ def ustvari_komentarji():
     cur.execute("""
         SELECT SETVAL(pg_get_serial_sequence('komentarji', 'stevilka'), 10000)
     """)
+    conn.commit()
+
+def ustvari_ocene():
+    cur.execute("""
+        CREATE TABLE ocene (
+            uporabnik_id INT NOT NULL REFERENCES uporabnik(uporabnik_id),
+            serijska INT NOT NULL REFERENCES igra(serijska),
+            ocena INT CHECK (ocena BETWEEN 1 AND 10),
+            PRIMARY KEY (uporabnik_id, serijska)
+        );
+    """)
+    cur.execute("""
+        ALTER TABLE ocene
+        ADD CONSTRAINT uporabnik_id CHECK (uporabnik_id != 10001)
+    """)
+    conn.commit()
 
 ###################################
 

@@ -68,7 +68,7 @@ def main():
 
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     c.execute("""
-        SELECT * FROM igra;
+        SELECT * FROM igra ORDER BY serijska;
     """)
     igre = c.fetchall()
     # Vrnemo predlogo za glavno stran
@@ -215,10 +215,10 @@ def igra_get(ime):
         """, [trenutna[1]])
         zvrsti = c.fetchall()
         c.execute("""
-            SELECT ocena FROM igra
-            WHERE ime=%s
-            """, [trenutna[1]])
-        ocena = c.fetchall()
+            SELECT ROUND(AVG(ocena),2) FROM ocene
+            WHERE serijska = (SELECT serijska FROM igra WHERE ime = %s)
+        """,[trenutna[1]])
+        ocena = c.fetchone()
         return bottle.template("igra.html", uporabnik=username, igra=ime, info=trenutna, avtorji=avtorji, oblikovalci=oblikovalci, zalozba=zalozba, dodatki=dodatki, osnova=osnova, komentarji=komentarji, zvrsti=zvrsti, ocena = ocena)
     else:
         bottle.redirect("/")
@@ -260,21 +260,38 @@ def igra_post(igra):
     (tip, username, mail) = get_user()
     komentar = bottle.request.forms.msg
     c = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    c.execute("""
-        INSERT INTO komentarji(uporabnik_id, serijska, komentar) VALUES (
+    if komentar != None and komentar != '':
+        c.execute("""
+            INSERT INTO komentarji(uporabnik_id, serijska, komentar) VALUES (
+                (SELECT uporabnik_id FROM uporabnik WHERE username=%s),
+                (SELECT serijska FROM igra WHERE ime=%s),
+                %s
+            )
+        """, [username, igra, komentar])
+    ocena = bottle.request.forms.rating
+    if ocena != None and ocena !='':
+        c.execute(""" 
+        UPDATE ocene SET
+            uporabnik_id =(SELECT uporabnik_id FROM uporabnik WHERE username=%s), 
+            serijska=(SELECT serijska FROM igra WHERE ime = %s), 
+            ocena=%s
+            WHERE uporabnik_id =(SELECT uporabnik_id FROM uporabnik WHERE username=%s) AND 
+                serijska=(SELECT serijska FROM igra WHERE ime = %s);
+        INSERT INTO ocene(uporabnik_id, serijska, ocena) SELECT 
             (SELECT uporabnik_id FROM uporabnik WHERE username=%s),
             (SELECT serijska FROM igra WHERE ime=%s),
-            %s
-        )
-    """, [username, igra, komentar])
+            %s WHERE NOT EXISTS (SELECT uporabnik_id, serijska FROM ocene WHERE 
+                uporabnik_id =(SELECT uporabnik_id FROM uporabnik WHERE username=%s) AND 
+                serijska=(SELECT serijska FROM igra WHERE ime = %s));
+            """,[username, igra, ocena, username, igra, username, igra, ocena, username, igra])
     bottle.redirect("/igra/%s" % igra)
+
 
 @bottle.get("/brskalnik/")
 def brskalnik_get():
     """Prikaži brskalnik iger. """
     (tip, username, mail) = get_user()
     return bottle.template("brskalnik.html", uporabnik=username)
-
 
 @bottle.post("/brskalnik/")
 def brskalnik_post():
