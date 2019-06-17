@@ -1,7 +1,7 @@
 # opb-projekt
  Julita Gabrijelčič, Gašper Letnar
 
-![Diagram2](https://user-images.githubusercontent.com/49061800/57190896-0d0b6d00-6f20-11e9-9e1f-b876a7a27174.png)
+![Diagram2](https://user-images.githubusercontent.com/49061800/59567782-7aa7ce80-9072-11e9-872c-652b0f460c7f.png)
 
 Vsi (zaenkrat) uporabljeni paketki so zbrani v mapi requirements.txt. Za inštalacijo zaženi ukaz v ukazni vrstici 'pip install -r requirements.txt'.
 Paketke si lahko naložiš v splošno python okolje, ali pa ustvariš virutalno okolje (priporočljivo) in jih naložiš tam. Da ustvariš virtualno
