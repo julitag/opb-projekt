@@ -124,7 +124,7 @@
           % if uporabnik == 'gost':
           
           <div class="card-body">
-              %if ocena:
+              %if ocena[0]:
               Ocena: <span style="color:rgb(64,64,64)"> {{ocena[0]}}/10 </span> </br>
               Število podanih ocen: <span style="color:rgb(64,64,64)">{{ocena[1]}} </span> </br>
               %else:
@@ -134,12 +134,12 @@
 
           % else:
           <div class="card-body">
-              %if ocena and upOcena:
+              %if ocena[0] and upOcena:
               Ocena: <span style="color:rgb(64,64,64)"> {{ocena[0]}}/10 </span> </br>
               Število podanih ocen: <span style="color:rgb(64,64,64)">{{ocena[1]}} </span> </br>
               Vaša trenutna ocena: <span style="color:rgb(64,64,64)">{{upOcena[0]}}</span> </br>
               Če trenutno oceno želite spremeniti, izberite novo vrednost in pritisnite na gumb Oceni igro.
-              %elif ocena:
+              %elif ocena[0]:
               Ocena: {{ocena[0]}}/10 </br>
               Število podanih ocen: {{ocena[1]}} </br>
               Igre še niste ocenili. Če to želite storiti, izberite oceno in pritisnite na gumb Oceni igro.
