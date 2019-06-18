@@ -35,38 +35,38 @@
                 </tr>
               </tfoot>
               <tbody>
-                  %for igra in igre:
+                  %for serijska, ime, min_igralcev, max_igralcev, min_cas, max_cas, leto_izdaje, starost, dodatek in igre:
                   <tr>
-                    <td>{{igra[0]}}</td>
+                    <td>{{serijska}}</td>
                     <td>
-                        <a href="/igra/{{igra[1]}}">{{igra[1]}}</a>
+                        <a href="/igra/{{ime}}">{{ime}}</a>
                     </td>
-                    <td>
-                        %if igra[2] == None:
+                    <td data-order="{{(0 if min_igralcev is None else min_igralcev)}}">
+                        %if min_igralcev == None:
                         {{""}}
-                        %elif igra[3] == igra[2]:
-                        {{str(igra[2])}}
+                        %elif max_igralcev == min_igralcev:
+                        {{str(min_igralcev)}}
                         %else:
-                        {{str(igra[2]) + ' - ' + str(igra[3])}}
+                        {{str(min_igralcev) + ' - ' + str(max_igralcev)}}
                         %end
                       </td>
                     </td>
-                    <td>
-                      %if igra[4] == None:
+                    <td data-order="{{(0 if min_cas is None else min_cas)}}">
+                      %if min_cas == None:
                       {{""}}
-                      %elif igra[5] == None:
-                      {{str(igra[4]) + " min"}}
+                      %elif max_cas == None:
+                      {{str(min_cas) + " min"}}
                       %else:
-                      {{str(igra[4]) + ' - ' + str(igra[5]) + " min"}}
+                      {{str(min_cas) + ' - ' + str(max_cas) + " min"}}
                       %end
                     </td>
-                    <td>
-                      %if igra[7] == None:
+                    <td data-order="{{(0 if starost is None else starost)}}">
+                      %if starost == None:
                       {{""}}
                       %else:
-                      {{str(igra[7]) + " let"}}</td>
+                      {{str(starost) + " let"}}</td>
                       %end
-                    <td>{{igra[6]}}</td>
+                    <td>{{leto_izdaje}}</td>
                   </tr>
                   %end 
               </tbody>
